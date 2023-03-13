@@ -21,6 +21,7 @@ public:
     negocioDoLado(){
 
         std::cout << "parabens, sabe mt\n";
+        ///Proxima biblioteca vai ser angra
 
         background.setFillColor(sf::Color(0,0,0));
         background.setSize(sf::Vector2f(wid,hei));
