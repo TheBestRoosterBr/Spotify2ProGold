@@ -42,8 +42,6 @@ void use_argv(std::vector<std::string> * musicas, int argc, char ** argv)
         }
     }
 
-    println("Diretorio atual: " + folder_path);
-
     FolderScanner scanner;
     scanner.setPath(folder_path);
     scanner.scan(&musicas);
@@ -53,49 +51,37 @@ void use_argv(std::vector<std::string> * musicas, int argc, char ** argv)
 
 int main(int argc, char ** argv)
 {
-    /*
     CustomMusic music;
-
     std::vector <std::string> musicas;
 
     if(argc == 1)
     {
         normal(musicas);
+        music.open(musicas[0]);
     }
     else
     {
         println("LENDO DIRETORIO...");
         use_argv(&musicas, argc, argv);
+        for(std::size_t i = 0; i < musicas.size(); i++){
+            if(!strcmp(argv[1], musicas[i].c_str())){
+                music.open(musicas[i]);
+                break;
+            }
+        }
     }
 
     std::cout << "Numero de musicas: " << musicas.size() << std::endl;
-    getch();
     for(std::size_t i = 0; i < musicas.size(); i++)
         println(musicas[i]);
 
+    music.play();
 
-    for(std::size_t i = 0; i < musicas.size(); i++)
-    {
-        if(!music.open(musicas[i]))
-        {
-            println("ERRO AO LER ARQUIVO DE SOM");
-            exit(1);
-        }
-
-        music.play();
-        music.setPitch(1);
-
-        getch();
-
-        music.close();
-    }
-
-    println("Pressione qualquer tecla para sair...");
-    getch();
-    */
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     homePage(window);
+
+    music.close();
     return 0;
 
 }
