@@ -37,7 +37,9 @@
 		</Unit>
 		<Unit filename="CustomMusic.h" />
 		<Unit filename="FolderScanner.h" />
+		<Unit filename="asasMorenas.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="silvanoSalles.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

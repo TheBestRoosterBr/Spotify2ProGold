@@ -1,5 +1,5 @@
+#include "SFML/Graphics.hpp"
 
-#include <conio.h>
 #include <iostream>
 #include <vector>
 #include <filesystem>
@@ -8,9 +8,13 @@
 #include <dirent.h>
 
 #define println(x) std::cout << x << std::endl
+#define WIDTH 1280
+#define HEIGHT 720
 
 #include "CustomMusic.h"
 #include "FolderScanner.h"
+#include "asasMorenas.h"
+#include "silvanoSalles.h"
 
 
 
@@ -49,7 +53,7 @@ void use_argv(std::vector<std::string> * musicas, int argc, char ** argv)
 
 int main(int argc, char ** argv)
 {
-
+    /*
     CustomMusic music;
 
     std::vector <std::string> musicas;
@@ -88,4 +92,10 @@ int main(int argc, char ** argv)
 
     println("Pressione qualquer tecla para sair...");
     getch();
+    */
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
+
+    homePage(window);
+    return 0;
+
 }

@@ -12,8 +12,6 @@ class FolderScanner{
 
     std::string folder_path;
 
-
-
 public:
 
     static std::string getExtension(std::string file){
