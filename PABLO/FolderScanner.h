@@ -38,12 +38,7 @@ public:
 
     static bool validFormat(std::string extension){
 
-        std::string vec[] = { ".mp3", ".wv", ".ogg"};
-        for(int i = 0; i < 3; i++)
-            if(vec[i] == extension)
-                return true;
-
-        return false;
+        return extension == ".mp3";
     }
 
 

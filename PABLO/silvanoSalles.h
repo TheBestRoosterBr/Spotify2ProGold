@@ -1,8 +1,7 @@
 #ifndef SILVANOSALLES_H_INCLUDED
 #define SILVANOSALLES_H_INCLUDED
 
-void homePage(sf::RenderWindow &window)
-{
+void homePage(sf::RenderWindow &window) {
 
     negocioDoLado negocio;
     sf::Texture logoTexture;
@@ -54,13 +53,10 @@ void homePage(sf::RenderWindow &window)
     window.draw(searchText);
     window.draw(buttonText);
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-            {
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
         }
@@ -75,6 +71,6 @@ void homePage(sf::RenderWindow &window)
         negocio.show(window);
         window.display();
     }
-};
+}
 
 #endif // SILVANOSALLES_H_INCLUDED
