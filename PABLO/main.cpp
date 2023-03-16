@@ -69,7 +69,7 @@ int main(int argc, char ** argv)
     }
 
     std::cout << "Numero de musicas: " << musicas.size() << std::endl;
-    getch();
+    getchar();
     for(std::size_t i = 0; i < musicas.size(); i++)
         println(musicas[i]);
 
@@ -85,17 +85,19 @@ int main(int argc, char ** argv)
         music.play();
         music.setPitch(1);
 
-        getch();
+        getchar();
 
         music.close();
     }
 
     println("Pressione qualquer tecla para sair...");
-    getch();
+    getchar();
     */
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
+    window.setFramerateLimit(22);
     homePage(window);
+
     return 0;
 
 }
