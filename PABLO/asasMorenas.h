@@ -54,7 +54,7 @@ public:
         int tposx = posX * 1.2 + homSpr.getGlobalBounds().width;
 
         arial.loadFromFile("fontes/arialBold.ttf");
-        inicio.setColor(sf::Color(255,255,255));
+        inicio.setColor(sf::Color::White);
         inicio.setFont(arial);
         inicio.setCharacterSize(csize);
         inicio.setString("Início");
