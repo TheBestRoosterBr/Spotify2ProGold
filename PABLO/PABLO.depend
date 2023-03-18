@@ -489,7 +489,7 @@
 	<sstream>
 	<vector>
 
-1678799484 source:c:\spotify2progold\pablo\main.cpp
+1678972916 source:c:\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -737,7 +737,7 @@
 
 1678557503 c:\spotify2progold\mpg123\include\fmt123.h
 
-1678557880 c:\spotify2progold\pablo\folderscanner.h
+1678928490 c:\spotify2progold\pablo\folderscanner.h
 	<windows.h>
 	<string>
 	<sstream>
@@ -1033,9 +1033,9 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1678799457 c:\spotify2progold\pablo\silvanosalles.h
+1678928490 c:\spotify2progold\pablo\silvanosalles.h
 
-1678799598 c:\spotify2progold\pablo\asasmorenas.h
+1678974578 c:\spotify2progold\pablo\asasmorenas.h
 
 1678751195 source:d:\projeto ed\spotifygold\pablo\main.cpp
 	"SFML/Graphics.hpp"
