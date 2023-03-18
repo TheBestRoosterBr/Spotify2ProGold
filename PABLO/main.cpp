@@ -15,21 +15,19 @@
 #include "FolderScanner.h"
 #include "asasMorenas.h"
 #include "silvanoSalles.h"
+#include "ListaString.h"
 
 
 
-
-void normal(std::vector<std::string> & musicas)
+void normal(PlayList * musicas)
 {
 
-    musicas.push_back("musicas/HERE I AM.mp3");
-    musicas.push_back("musicas/euAmoVoce.mp3");
-    musicas.push_back("musicas/asd.mp3");
-    musicas.push_back("musicas/serestaDoParedao.mp3");
-
+    musicas->push_back("musicas/HERE I AM.mp3");
+    musicas->push_back("musicas/asd.mp3");
+    musicas->push_back("musicas/HERE I AM.mp3");
 }
 
-void use_argv(std::vector<std::string> * musicas, int argc, char ** argv)
+void use_argv(PlayList * musicas, int argc, char ** argv)
 {
 
     std::string folder_path = argv[1];
@@ -46,68 +44,24 @@ void use_argv(std::vector<std::string> * musicas, int argc, char ** argv)
     scanner.setPath(folder_path);
     scanner.scan(&musicas);
 
-    println(musicas->size());
+    println(musicas->_size());
 }
 
 int main(int argc, char ** argv)
 {
-    /*
-    CustomMusic music;
-    std::vector <std::string> musicas;
+    PlayList playlist;
+    normal(&playlist);
 
-    if(argc == 1)
-    {
-        normal(musicas);
-        music.open(musicas[0]);
-    }
-    else
-    {
-        println("LENDO DIRETORIO...");
-        use_argv(&musicas, argc, argv);
-        for(std::size_t i = 0; i < musicas.size(); i++){
-            if(!strcmp(argv[1], musicas[i].c_str())){
-                music.open(musicas[i]);
-                break;
-            }
-        }
-    }
-
-    std::cout << "Numero de musicas: " << musicas.size() << std::endl;
-
-    getchar();
-
-    for(std::size_t i = 0; i < musicas.size(); i++)
-        println(musicas[i]);
-
-    music.play();
+    Tocador tocador(&playlist);
 
 
-    for(std::size_t i = 0; i < musicas.size(); i++)
-    {
-        if(!music.open(musicas[i]))
-        {
-            println("ERRO AO LER ARQUIVO DE SOM");
-            exit(1);
-        }
 
-        music.play();
-        music.setPitch(1);
+    println(tocador.getMusicaAtual());
+    tocador.open();
+    tocador.skip();
+    tocador.play();
 
-        getchar();
 
-        music.close();
-    }
-
-    println("Pressione qualquer tecla para sair...");
-    getchar();
-
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
-
-    window.setFramerateLimit(22);
-    homePage(window);
-
-    music.close();
-    */
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     window.setFramerateLimit(22);

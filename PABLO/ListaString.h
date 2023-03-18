@@ -1,145 +1,184 @@
-#include <iostream>
-#include <cstdlib>
-#include <string>
+#ifndef ANGRA
+#define ANGRA
 
+
+#include <string>
+#include "customMusic.h"
 using namespace std;
 
 
-
-struct tipoNo
+struct No
 {
     string musica;
-    tipoNo *proxNo, *antNo;
+    No *proxNo, *antNo;
 };
 
-struct tipoLista
-{
-    tipoNo *fim, *inicio;
-    int quant;
+class PlayList{
+
+
+
+    No * primeiro;
+    No * ultimo;
+    int tamanho;
+
+
+    void inserirListaVazia(string musica){
+        No * novo = new No;
+
+        novo->musica = musica;
+        novo->antNo = NULL;
+        novo->proxNo = NULL;
+        primeiro = novo;
+        ultimo = novo;
+        tamanho++;
+
+    }
+
+public:
+
+
+    PlayList(){
+
+        primeiro = NULL;
+        ultimo = NULL;
+        tamanho = 0;
+    }
+
+    int _size(){
+        return tamanho;
+    }
+    No * operator [] (int i){
+
+        No * temp = primeiro;
+        for(int k = 0; k < i; k++)
+            temp = temp->proxNo;
+        return temp;
+
+    }
+
+    void push_back(string musica){
+
+        if(primeiro == NULL)
+            inserirListaVazia(musica);
+        else
+        {
+            No * novoNo = new No;
+
+            novoNo->musica = musica;
+            novoNo->proxNo=NULL;
+            ultimo->proxNo = novoNo;
+            novoNo->antNo = ultimo;
+            ultimo = novoNo;
+            tamanho++;
+        }
+
+    }
+
+    void removerInicio(){
+        No * temp = primeiro;
+        if(temp != NULL){
+            primeiro = primeiro->proxNo;
+            primeiro->antNo = NULL;
+            delete temp;
+            tamanho--;
+        }
+    }
+
+    void removerFim(){
+        if(tamanho == 1){
+            removerInicio();
+        }
+
+        No * temp = ultimo;
+        if(temp != NULL){
+            ultimo = temp->antNo;
+            ultimo->proxNo = NULL;
+            delete temp;
+            tamanho--;
+        }
+    }
+
+    void removerPosicao(int posicao){
+
+        if(tamanho == 1){
+            removerInicio();
+            return;
+        }
+
+        if(tamanho == posicao + 1){
+            removerFim();
+            return;
+        }
+        No * temp = primeiro;
+        for(int i = 0; i < posicao; i++){
+            temp = temp->proxNo;
+        }
+
+        No * ant = temp->antNo;
+        No * dir = temp->proxNo;
+
+        ant->proxNo = dir;
+        dir->antNo = ant;
+        delete temp;
+
+    }
 };
 
-void inicializa(tipoLista *listaEnc)
-{
-    listaEnc->fim = NULL;
-    listaEnc->inicio = NULL;
-    listaEnc->quant = 0;
-}
+class Tocador{
 
-int insereListaVazia(tipoLista *listaEnc, string valor)
-{
-    tipoNo *novoNo;
-    novoNo = new tipoNo;
-    if(novoNo == NULL)
-        return 0;
-    novoNo->musica = valor;
-    novoNo->proxNo = NULL;
-    novoNo->antNo = NULL;
-    listaEnc->inicio = novoNo;
-    listaEnc->fim = novoNo;
-    listaEnc->quant++;
-    return 1;
-}
-
-void exibeLista(tipoLista *listaEnc)
-{
-    tipoNo *atual;
-    atual = listaEnc->inicio;
-    cout << "\nMusicas Adcionadas "<< endl;
-    while(atual !=NULL)
-    {
-        cout << atual->musica << " " << endl;
-        atual = atual->proxNo;
-    }
-}
-
-int insereNoFim(tipoLista *listaEnc, string valor)
-{
-    tipoNo *novoNo;
-    if(listaEnc->inicio == NULL)
-        insereListaVazia(listaEnc, valor);
-    else
-    {
-        novoNo = new tipoNo;
-        if(novoNo == NULL)
-            return 0;
-        novoNo->musica=valor;
-        novoNo->proxNo=NULL;
-        listaEnc->fim->proxNo = novoNo;
-        novoNo->antNo = listaEnc->fim;
-        listaEnc->fim = novoNo;
-        listaEnc->quant++;
-        return 1;
-    }
-}
-
-void removerInicio(tipoLista * listaEnc){
-    tipoNo * temp = listaEnc->inicio;
-
-    if(temp != NULL){
-        listaEnc->inicio = temp->proxNo;
-        delete temp;
-        temp = NULL;
-        listaEnc->quant--;
-    }
-}
+    PlayList * playlist;
+    No * musica_atual;
+    CustomMusic music;
 
 
-void removerFim(tipoLista * listaEnc){
+public:
 
-    if(listaEnc->quant == 1){
-        removerInicio(listaEnc);
-        return;
+
+    Tocador(PlayList * playlist){
+        this->playlist = playlist;
+        musica_atual = playlist[0][0];
     }
 
-    tipoNo * temp = listaEnc->fim;
-    if(temp != NULL){
-        listaEnc->fim = temp->antNo;
-        delete temp;
-        listaEnc->fim->proxNo = NULL;
-        listaEnc->quant--;
-    }
-}
-
-void removerPosicao(tipoLista * listaEnc, int posicao){
-
-    if(listaEnc->quant == 1){
-        removerInicio(listaEnc);
-        return;
-    }
-    if(listaEnc->quant == posicao + 1){
-        removerFim(listaEnc);
-        return;
+    string getMusicaAtual(){
+        return musica_atual->musica;
     }
 
-    tipoNo * temp = listaEnc->inicio;
-    for(int i = 0; i < posicao; i++){
-        temp = temp->proxNo;
+    bool skip(){
+        if(musica_atual->proxNo != NULL){
+            musica_atual = musica_atual->proxNo;
+            return true;
+        }
+        return false;
     }
 
-    tipoNo * ant = temp->antNo;
-    tipoNo * dir = temp->proxNo;
+    bool previous(){
+        if(musica_atual->antNo != NULL){
+            musica_atual = musica_atual->antNo;
+            return true;
+        }
+        return false;
+    }
 
-    ant->proxNo = dir;
-    dir->antNo = ant;
-    delete temp;
+    bool open(){
+        return music.open(musica_atual->musica);
+    }
+
+    bool play(){
+        if(open()){
+            music.play();
+            return true;
+        }
+        return false;
+    }
+
+    bool pause(){
+
+        music.pause();
+        return true;
+
+    }
+
+};
 
 
-}
-
-int main()
-{
-    tipoLista lista;
-    string aux;
-    int op;
-    inicializa(&lista);
-
-    insereNoFim(&lista, "MARCOS");
-    insereNoFim(&lista, "VINCIUS");
-    insereNoFim(&lista, "MOTA");
-    insereNoFim(&lista, "MENEZES");
-    removerPosicao(&lista, 2);
-    exibeLista(&lista);
-
-
-    return 0;
-}
+#endif // ANGRA

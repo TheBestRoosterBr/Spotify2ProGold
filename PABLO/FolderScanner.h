@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-
+#include "ListaString.h"
 #define println(x) std::cout << x << std::endl
 
 class FolderScanner{
@@ -58,7 +58,7 @@ public:
         return this->folder_path;
     }
 
-    void scan(std::vector <std::string> ** files){
+    void scan(PlayList ** files){
 
         WIN32_FIND_DATAA find_data; // estrutura para armazenar informações sobre o arquivo encontrado
         HANDLE hFind = FindFirstFileA((folder_path + std::string("\\*")).c_str(), &find_data); // procura o primeiro arquivo ou pasta na pasta especificada
