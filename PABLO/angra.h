@@ -1,37 +1,50 @@
 #ifndef ANGRA_H_INCLUDED
 #define ANGRA_H_INCLUDED
-/*************************
-parte de cebolinha:
 
 
-
-
-*/
-
-
-struct playButton{
+class PlayButton{
     sf::CircleShape circle;
     sf::CircleShape triangle;
     sf::RectangleShape recs[2];
 
-    void init(){
+public:
+    PlayButton(){
+
+        int recHei = HEIGHT/7;
 
         circle.setFillColor(sf::Color(255,255,255));
-        circle.setRadius(recHei/4);
-        circle.setPosition(WIDTH/2 - recHei/8,HEIGHT - recHei * 3/2);
+        circle.setRadius(recHei/5);
+        circle.setPosition(WIDTH/2 - circle.getRadius(),HEIGHT - recHei + circle.getRadius());
 
         triangle.setPointCount(3);
         triangle.setRadius(circle.getRadius()/2);
-        triangle.setPosition(WIDTH/2 - triangle.getRadius(),HEIGHT - recHei/2);
+        triangle.setRotation(90);
+
+        triangle.setPosition
+        (
+            WIDTH/2 + triangle.getGlobalBounds().width/1.5,
+            HEIGHT - recHei + circle.getRadius() + triangle.getGlobalBounds().height/2
+        );
+
+        triangle.setFillColor(sf::Color(0,0,0));
+
 
         int recSize = circle.getRadius()/2;
+
         for(int i  = 0; i < 2; i++){
-            recs[i].setSize(recSize/4,recSize);
-            recs[i].setFillColor(sf::Color color(255,255,255));
-            recs[i].setPosition(WIDTH/2 + (recSize * 4 * i) - recSize * 2,HEIGHT - recHei/2);
+            recs[i].setSize(sf::Vector2f(recSize/2,recSize * 2));
+            recs[i].setFillColor(sf::Color(0,0,0));
+            recs[i].setPosition(
+                WIDTH/2 + recSize * i - recSize/1.5,
+                HEIGHT - recHei + circle.getRadius() + recSize
+            );
 
         }
 
+    }
+
+    bool hover(sf::Vector2f mousePos) {
+        return circle.getGlobalBounds().contains(mousePos);
     }
 
     void show(sf::RenderWindow& window, bool isPlaying){
@@ -46,14 +59,108 @@ struct playButton{
     }
 };
 
+class BotaoAvancar{
+    sf::CircleShape avancar;
+    sf::RectangleShape quadAv;
+
+public:
+
+    BotaoAvancar(){
+        int recHei = HEIGHT/7;
+        avancar.setPointCount(3);
+        avancar.setRotation(90);
+        avancar.setRadius(recHei/8);
+        avancar.setFillColor(sf::Color(150,150,150));
+        avancar.setPosition(sf::Vector2f(
+            WIDTH/2 + avancar.getRadius()*6,
+            HEIGHT - recHei + recHei/5 + avancar.getGlobalBounds().height/2
+        ));
+
+        quadAv.setSize(sf::Vector2f(avancar.getRadius()/2,avancar.getRadius()*2));
+        quadAv.setFillColor(sf::Color(150,150,150));
+        quadAv.setPosition(
+            WIDTH/2 + avancar.getRadius()*6,
+            HEIGHT - recHei + recHei/5 + avancar.getGlobalBounds().height/2
+        );
+    }
+
+    bool hover(sf::Vector2f mousePos) {
+        if(avancar.getGlobalBounds().contains(mousePos) || quadAv.getGlobalBounds().contains(mousePos)){
+            avancar.setFillColor(sf::Color(255,255,255));
+            quadAv.setFillColor(sf::Color(255,255,255));
+
+            return true;
+        }else{
+            avancar.setFillColor(sf::Color(150,150,150));
+            quadAv.setFillColor(sf::Color(150,150,150));
+
+            return false;
+
+        }
+
+    }
+    void show(sf::RenderWindow& window){
+        window.draw(avancar);
+        window.draw(quadAv);
+
+    }
+
+};
 
 
-class jogador{
+class BotaoVoltar{
+    sf::CircleShape voltar;
+    sf::RectangleShape quadAv;
+
+public:
+
+    BotaoVoltar(){
+        int recHei = HEIGHT/7;
+        voltar.setPointCount(3);
+        voltar.setRotation(90 + 180);
+        voltar.setRadius(recHei/8);
+        voltar.setFillColor(sf::Color(150,150,150));
+        voltar.setPosition(sf::Vector2f(
+            WIDTH/2 - voltar.getRadius()*8,
+            HEIGHT - recHei + recHei/5 + voltar.getGlobalBounds().height/2
+        ));
+
+        quadAv.setSize(sf::Vector2f(voltar.getRadius()/2,voltar.getRadius()*2));
+        quadAv.setFillColor(sf::Color(150,150,150));
+        quadAv.setPosition(
+            WIDTH/2 - voltar.getRadius()*10,
+            HEIGHT - recHei + recHei/5 + voltar.getGlobalBounds().height/2
+        );
+    }
+
+    bool hover(sf::Vector2f mousePos) {
+        if(voltar.getGlobalBounds().contains(mousePos) || quadAv.getGlobalBounds().contains(mousePos)){
+            voltar.setFillColor(sf::Color(255,255,255));
+            quadAv.setFillColor(sf::Color(255,255,255));
+            return true;
+        }else{
+            quadAv.setFillColor(sf::Color(150,150,150));
+            quadAv.setFillColor(sf::Color(255,255,255));
+            return false;
+
+        }
+
+    }
+    void show(sf::RenderWindow& window){
+        window.draw(voltar);
+        window.draw(quadAv);
+
+    }
+
+};
+
+class Jogador{
+public:
 
 
-    bool isPlaying;
+    bool isPlaying = true;
 
-
+    //Tocador tocador;
 
 
 //desenhos:
@@ -61,24 +168,38 @@ class jogador{
     int recHei = HEIGHT/7;
 
     sf::RectangleShape back;
-    playButton pButton;
+
+    PlayButton pButton;
+    BotaoAvancar bAvancar;
+    BotaoVoltar bVoltar;
+    sf::CircleShape voltar;
+    sf::RectangleShape quadVol;
+
+    Tocador * tocador;
 
 
 
+    Jogador(){
 
-
-public:
-
-    jogador(){
-
-        pButton.init();
-
+        back.setSize(sf::Vector2f(recWid,recHei));
+        back.setPosition(0,HEIGHT - recHei);
+        back.setFillColor(sf::Color(50,50,50));
 
     }
+
+    void setTocador(Tocador * p){
+        this->tocador = p;
+    }
+
     void show(sf::RenderWindow& window){
         window.draw(back);
         pButton.show(window,isPlaying);
+        bAvancar.show(window);
+        bVoltar.show(window);
     }
+
+
+
 
 
 };

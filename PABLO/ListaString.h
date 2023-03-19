@@ -122,6 +122,7 @@ class PlayList {
 
     void load(){
 
+
         std::fstream f("Playlists\\" + nome + ".txt",  ios::in);
 
         string n;
@@ -134,8 +135,8 @@ class PlayList {
     }
 
 
-    void removerPosicao(int posicao) {
 
+    void removerPosicao(int posicao) {
         if(tamanho == 1) {
             removerInicio();
             return;
@@ -170,10 +171,15 @@ class Tocador {
   public:
 
 
-    Tocador(PlayList * playlist) {
-        this->playlist = playlist;
+    Tocador() {
+        this->playlist = NULL;
+        musica_atual = NULL;
     }
 
+    void setPlaylist(PlayList * p){
+        this->playlist = p;
+        init();
+    }
     string getMusicaAtual() {
         return musica_atual->musica;
     }
@@ -204,19 +210,19 @@ class Tocador {
         return music.open(musica_atual->musica);
     }
 
-    bool play() {
-        if(open()) {
-            music.play();
-            return true;
-        }
-        return false;
+
+    void play() {
+        open();
+        music.play();
+
     }
 
-    bool pause() {
-
+    void pause() {
         music.pause();
-        return true;
+    }
 
+    void desPause(){
+        music.play();
     }
 
 };

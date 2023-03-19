@@ -31,7 +31,7 @@ public:
 
 
         background.setFillColor(sf::Color(0,0,0));
-        background.setSize(sf::Vector2f(wid * 1.2,hei));
+        background.setSize(sf::Vector2f(wid * 1.33,hei));
 
         background.setPosition(0,0);
 
