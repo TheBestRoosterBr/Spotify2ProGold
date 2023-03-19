@@ -11,13 +11,13 @@
 #define WIDTH 1280
 #define HEIGHT 720
 
+#include "essaPorraVaiAparecer.h"
 #include "CustomMusic.h"
 #include "FolderScanner.h"
 #include "asasMorenas.h"
 #include "silvanoSalles.h"
 #include "bandaDjavu.h"
 #include "ListaString.h"
-
 
 
 void normal(PlayList * musicas)
