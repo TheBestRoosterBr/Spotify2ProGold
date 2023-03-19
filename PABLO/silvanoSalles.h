@@ -11,6 +11,8 @@ void homePage(sf::RenderWindow &window) {
 
     PlayList playlist("SO AS MELHORES");
     playlist.load();
+
+
     tocador.setPlaylist(&playlist);
     jogador.setTocador(&tocador);
 
