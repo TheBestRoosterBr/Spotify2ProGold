@@ -72,7 +72,7 @@ void createPlaylist(sf::RenderWindow &window) {
 
     FolderScanner scan;
     std::vector <string> musicas;
-
+    std::vector <sf::Text> musgasAdds;
 
     scan.setPath("musicas");
 
