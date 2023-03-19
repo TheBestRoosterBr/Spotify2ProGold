@@ -120,15 +120,15 @@ public:
         voltar.setRadius(recHei/8);
         voltar.setFillColor(sf::Color(150,150,150));
         voltar.setPosition(sf::Vector2f(
-            WIDTH/2 - voltar.getRadius()*8,
-            HEIGHT - recHei + recHei/5 + voltar.getGlobalBounds().height/2
+            WIDTH/2 - voltar.getRadius()*6,
+            HEIGHT - recHei + recHei/2.5  + voltar.getGlobalBounds().height/2
         ));
 
         quadAv.setSize(sf::Vector2f(voltar.getRadius()/2,voltar.getRadius()*2));
         quadAv.setFillColor(sf::Color(150,150,150));
         quadAv.setPosition(
-            WIDTH/2 - voltar.getRadius()*9,
-            HEIGHT - recHei + recHei/5 + avancar.getGlobalBounds().height/2
+            WIDTH/2 - voltar.getRadius()*6.5,
+            HEIGHT - recHei + recHei/5 + voltar.getGlobalBounds().height/2
         );
     }
 
@@ -138,7 +138,7 @@ public:
             quadAv.setFillColor(sf::Color(255,255,255));
             return true;
         }else{
-            quadAv.setFillColor(sf::Color(150,150,150));
+            voltar.setFillColor(sf::Color(150,150,150));
             quadAv.setFillColor(sf::Color(150,150,150));
             return false;
 
@@ -156,25 +156,50 @@ public:
 class ONegocioQueFicaGrande{
 
     int wid = WIDTH/3;
-    int hei = wid/20;
+    int hei = wid/80;
     sf::RectangleShape barra;
     sf::RectangleShape barraGold;
     sf::CircleShape bola;
 
 public:
     ONegocioQueFicaGrande(){
-        barra.setSize(wid,hei);
+        barra.setSize(sf::Vector2f(wid,hei));
         barra.setFillColor(sf::Color(150,150,150));
-        barra.setPosition(WIDTH/2 - wid/2,HEIGHT - hei*4);
+        barra.setPosition(sf::Vector2f(WIDTH/2 - wid/2,HEIGHT - hei*6));
+
+        barraGold.setPosition(barra.getPosition());
+        barraGold.setFillColor(sf::Color::White);
+        barraGold.setSize(sf::Vector2f(0, hei));
+
+        bola.setRadius(hei * 2);
+        bola.setFillColor(sf::Color::White);
+
+    }
+
+
+    void hover(sf::Vector2f mouse, sf::RenderWindow& window){
+
+        if(barra.getGlobalBounds().contains(mouse)){
+            barraGold.setFillColor(sf::Color(212,175,55));
+
+
+        }else{
+             barraGold.setFillColor(sf::Color::White);
+
+        }
 
     }
 
     void show(sf::RenderWindow& window){
         window.draw(barra);
-
+        window.draw(barraGold);
 
     }
 
+    void update(double porcentagem){
+        barraGold.setSize(sf::Vector2f(barra.getSize().x * porcentagem, hei));
+        bola.setPosition(sf::Vector2f(WIDTH/2 - wid/2,HEIGHT - hei*6));
+    }
 
 };
 class Jogador{
@@ -198,6 +223,7 @@ public:
     sf::CircleShape voltar;
     sf::RectangleShape quadVol;
 
+    ONegocioQueFicaGrande negQficaGrande;
     Tocador * tocador;
 
 
@@ -219,10 +245,8 @@ public:
         pButton.show(window,isPlaying);
         bAvancar.show(window);
         bVoltar.show(window);
+        negQficaGrande.show(window);
     }
-
-
-
 
 
 };

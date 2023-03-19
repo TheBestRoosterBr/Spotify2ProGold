@@ -60,11 +60,8 @@ public:
 
     void scan(std::vector<std::string> & files){
 
-<<<<<<< HEAD
-        WIN32_FIND_DATAA find_data; // estrutura para armazenar informaï¿½ï¿½es sobre o arquivo encontrado
-=======
+
         WIN32_FIND_DATAA find_data; // estrutura para armazenar informações sobre o arquivo encontrado
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
         HANDLE hFind = FindFirstFileA((folder_path + std::string("\\*")).c_str(), &find_data); // procura o primeiro arquivo ou pasta na pasta especificada
 
         if (hFind != INVALID_HANDLE_VALUE) {
@@ -74,21 +71,11 @@ public:
                     files.push_back(temp);
                 }
 
-<<<<<<< HEAD
             } while (FindNextFileA(hFind, &find_data)); // encontra o prï¿½ximo arquivo ou pasta na pasta especificada
-=======
-            } while (FindNextFileA(hFind, &find_data)); // encontra o próximo arquivo ou pasta na pasta especificada
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
+
 
             FindClose(hFind); // fecha o handle de pesquisa
         }
-
-<<<<<<< HEAD
-=======
-        else {
-            throw "Erro ao abrir pasta";
-        }
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
 
     }
     void scan(PlayList ** files){

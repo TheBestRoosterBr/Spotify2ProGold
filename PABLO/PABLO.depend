@@ -489,7 +489,7 @@
 	<sstream>
 	<vector>
 
-1679185392 source:c:\spotify2progold\pablo\main.cpp
+1679191725 source:c:\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -501,6 +501,7 @@
 	"FolderScanner.h"
 	"asasMorenas.h"
 	"silvanoSalles.h"
+	"bandaDjavu.h"
 	"ListaString.h"
 
 1678557504 c:\spotify2progold\pablo\custommusic.h
@@ -738,7 +739,7 @@
 
 1678557503 c:\spotify2progold\mpg123\include\fmt123.h
 
-1679185393 c:\spotify2progold\pablo\folderscanner.h
+1679187040 c:\spotify2progold\pablo\folderscanner.h
 	<windows.h>
 	<string>
 	<sstream>
@@ -1035,12 +1036,12 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1679185440 c:\spotify2progold\pablo\silvanosalles.h
+1679190087 c:\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679168548 c:\spotify2progold\pablo\asasmorenas.h
+1679191677 c:\spotify2progold\pablo\asasmorenas.h
 
-1679170527 source:d:\projeto ed\spotifygold\pablo\main.cpp
+1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -1579,16 +1580,17 @@
 
 1678750374 d:\projeto ed\spotifygold\mpg123\include\fmt123.h
 
-1679170552 d:\projeto ed\spotifygold\pablo\folderscanner.h
+1679185770 d:\projeto ed\spotifygold\pablo\folderscanner.h
 	<windows.h>
 	<string>
 	<sstream>
 	<vector>
 	"ListaString.h"
 
-1679164780 d:\projeto ed\spotifygold\pablo\asasmorenas.h
+1679185523 d:\projeto ed\spotifygold\pablo\asasmorenas.h
 
-1678750509 d:\projeto ed\spotifygold\pablo\silvanosalles.h
+1679186995 d:\projeto ed\spotifygold\pablo\silvanosalles.h
+	"angra.h"
 
 1679063679 source:c:\users\okaua\desktop\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
@@ -2144,23 +2146,28 @@
 	<string>
 	"customMusic.h"
 
-1679185393 c:\spotify2progold\pablo\listastring.h
+1679189704 c:\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
 	"customMusic.h"
 
-1679185195 D
+1679169825 D
 
-1679185961 c:\spotify2progold\pablo\angra.h
+1679190526 c:\spotify2progold\pablo\angra.h
 
-1679175880 c:\spotify2progold\pablo\bandadjavu.h
+1679196457 c:\spotify2progold\pablo\bandadjavu.h
+	"angra.h"
 
-1679169825 d:\projeto ed\spotifygold\pablo\listastring.h
+1679186951 d:\projeto ed\spotifygold\pablo\listastring.h
+
+1679185523 fab5b8924adb41331d7bc41eb332d2eb9327d
 	<string>
 	<fstream>
 	<iostream>
 	"customMusic.h"
 
 1679169825 78c9828d44c0e32c47df03caef121ae4a06a4
+
+1679185523 d:\projeto ed\spotifygold\pablo\angra.h
 

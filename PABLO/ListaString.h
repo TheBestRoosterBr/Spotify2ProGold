@@ -121,7 +121,7 @@ class PlayList {
     }
 
     void load(){
-<<<<<<< HEAD
+
 
         std::fstream f("Playlists\\" + nome + ".txt",  ios::in);
 
@@ -135,25 +135,8 @@ class PlayList {
     }
 
 
-    void removerPosicao(int posicao) {
-
-=======
-
-        std::fstream f("Playlists\\" + nome + ".txt",  ios::in);
-
-        string n;
-        while(f.eof() == false){
-
-            getline(f, n);
-            push_back(n);
-        }
-
-    }
-
 
     void removerPosicao(int posicao) {
-
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
         if(tamanho == 1) {
             removerInicio();
             return;
@@ -182,29 +165,30 @@ class Tocador {
 
     PlayList * playlist;
     No * musica_atual;
-    CustomMusic music;
+    CustomMusic * music;
 
 
   public:
 
 
-<<<<<<< HEAD
+    int getMusicPosicion(){
+        return music->getCurrentTime();
+    }
+
+    int getMusicDuration(){
+        return music->getDuration().asSeconds() * 2;
+    }
+
     Tocador() {
         this->playlist = NULL;
         musica_atual = NULL;
+        music = new CustomMusic;
     }
 
     void setPlaylist(PlayList * p){
         this->playlist = p;
         init();
     }
-
-=======
-    Tocador(PlayList * playlist) {
-        this->playlist = playlist;
-    }
-
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
     string getMusicaAtual() {
         return musica_atual->musica;
     }
@@ -232,34 +216,26 @@ class Tocador {
     }
 
     bool open() {
-        return music.open(musica_atual->musica);
+        return music->open(musica_atual->musica);
     }
 
-<<<<<<< HEAD
-
+    void update(){
+        delete music;
+        music = new CustomMusic;
+        music->open(musica_atual->musica);
+    }
     void play() {
-        open();
-        music.play();
+        update();
+        music->play();
 
     }
-=======
-    bool play() {
-        if(open()) {
-            music.play();
-            return true;
-        }
-        return false;
-    }
-
-    bool pause() {
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
 
     void pause() {
-        music.pause();
+        music->pause();
     }
 
     void desPause(){
-        music.play();
+        music->play();
     }
 
 };

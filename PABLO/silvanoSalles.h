@@ -17,11 +17,14 @@ void homePage(sf::RenderWindow &window) {
     jogador.setTocador(&tocador);
 
     jogador.tocador->init();
+    jogador.tocador->update();
     jogador.tocador->play();
 
 
     sf::RectangleShape background(sf::Vector2f(WIDTH,HEIGHT));
     background.setFillColor(sf::Color(255,255,255,20));
+
+    bool trocou = false;
 
 
     while (window.isOpen()) {
@@ -41,8 +44,23 @@ void homePage(sf::RenderWindow &window) {
                 {
 
                     if(jogador.bAvancar.hover(mouse)){
-                        jogador.tocador->skip();
-                        jogador.tocador->play();
+                            jogador.tocador->skip();
+                            trocou = true;
+                            if(jogador.isPlaying){
+                                jogador.tocador->play();
+                            }
+
+                    }
+
+                    if(jogador.bVoltar.hover(mouse)){
+
+
+                        jogador.tocador->previous();
+                        trocou = true;
+                        if(jogador.isPlaying){
+                                jogador.tocador->play();
+                        }
+
                     }
 
                     if(jogador.pButton.hover(mouse)){
@@ -51,7 +69,15 @@ void homePage(sf::RenderWindow &window) {
                             jogador.tocador->pause();
                         }
                         else {
-                            jogador.tocador->desPause();
+                            if(trocou){
+                                jogador.tocador->play();
+                                trocou = false;
+                            }
+                            else{
+                                jogador.tocador->desPause();
+                                trocou = false;
+                            }
+
                         }
                         jogador.isPlaying = !jogador.isPlaying;
 
@@ -65,7 +91,11 @@ void homePage(sf::RenderWindow &window) {
 
         }
 
+        jogador.negQficaGrande.update(  (double) jogador.tocador->getMusicPosicion() / jogador.tocador->getMusicDuration());
+
         jogador.bAvancar.hover(mouse);
+        jogador.bVoltar.hover(mouse);
+        jogador.negQficaGrande.hover(mouse,window);
         window.clear();
         window.draw(background);
         negocio.show(window);

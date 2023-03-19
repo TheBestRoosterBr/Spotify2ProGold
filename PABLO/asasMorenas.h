@@ -25,6 +25,7 @@ class negocioDoLado{
 
     sf::Texture logoT;
     sf::Sprite logoSpr;
+
 public:
     negocioDoLado(){
 
@@ -82,6 +83,10 @@ public:
         sua_bib.setPosition(tposx,posY * 4);
 
 
+    }
+
+    sf::Vector2f getSize(){
+        return sf::Vector2f(wid * 1.33,hei);
     }
 
     void show(sf::RenderWindow& window){

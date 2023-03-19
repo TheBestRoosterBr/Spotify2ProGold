@@ -15,6 +15,7 @@
 #include "FolderScanner.h"
 #include "asasMorenas.h"
 #include "silvanoSalles.h"
+#include "bandaDjavu.h"
 #include "ListaString.h"
 
 
@@ -72,94 +73,10 @@ int main(int argc, char ** argv)
 {
 
 
-    ///AGORA VOCE PODE SALVAR SUAS PLAYLISTS, OBRIGATORIO O NOME DA PLAYLIST NO CONSTRUTOR
-    PlayList playlist("SO AS MELHORES");
-<<<<<<< HEAD
-    Tocador tocador;
-    tocador.setPlaylist(&playlist);
-
-    std::vector<string> * vect = getPlaylistsSaved();
-    printPlaylists(*vect);
-
-
-
-    if(argc == 2){
-
-        use_argv(&playlist, argc, argv);
-        tocador.init();
-        while(strcmp(tocador.getMusicaAtual().c_str(), argv[1])){
-            tocador.skip();
-        }
-
-
-    }
-
-    else{
-
-        fstream temp("Playlists\\" + playlist.getNome() + ".txt");
-        if(temp.fail()){
-            normal(&playlist);
-        }
-        else{
-            playlist.load();
-        }
-        temp.close();
-        tocador.init();
-
-    }
-
-=======
-    Tocador tocador(&playlist);
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
-
-    std::vector<string> * vect = getPlaylistsSaved();
-    printPlaylists(*vect);
-
-
-
-    if(argc == 2){
-
-        use_argv(&playlist, argc, argv);
-        tocador.init();
-        while(strcmp(tocador.getMusicaAtual().c_str(), argv[1])){
-            tocador.skip();
-        }
-
-
-    }
-
-    else{
-
-        fstream temp("Playlists\\" + playlist.getNome() + ".txt");
-        if(temp.fail()){
-            normal(&playlist);
-        }
-        else{
-            playlist.load();
-        }
-        temp.close();
-        tocador.init();
-
-    }
-
-
-
-    playlist.savePlaylist();
-
-    println(tocador.getMusicaAtual());
-<<<<<<< HEAD
-   // tocador.open();
-    //tocador.play();
-=======
-    tocador.open();
-    tocador.play();
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
-
-
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     window.setFramerateLimit(22);
-    homePage(window);
+    createPlaylist(window);
 
     return 0;
 
