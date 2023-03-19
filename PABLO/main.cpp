@@ -10,7 +10,7 @@
 #define println(x) std::cout << x << std::endl
 #define WIDTH 1280
 #define HEIGHT 720
-
+#include "loadPlaylist.h"
 #include "CustomMusic.h"
 #include "FolderScanner.h"
 #include "asasMorenas.h"

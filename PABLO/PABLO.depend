@@ -1039,7 +1039,8 @@
 1679190087 c:\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679191677 c:\spotify2progold\pablo\asasmorenas.h
+1679197587 c:\spotify2progold\pablo\asasmorenas.h
+	<dirent.h>
 
 1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
 	"SFML/Graphics.hpp"
@@ -2146,7 +2147,7 @@
 	<string>
 	"customMusic.h"
 
-1679189704 c:\spotify2progold\pablo\listastring.h
+1679197414 c:\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
