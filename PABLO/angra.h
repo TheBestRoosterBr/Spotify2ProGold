@@ -279,8 +279,8 @@ public:
         bAvancar.show(window);
         bVoltar.show(window);
         negQficaGrande.show(window);
-        rButton.show(window);
-        lButton.show(window);
+        rButton.visualmentos(window);
+        lButton.visualmentos(window);
     }
 
 
