@@ -3,26 +3,28 @@
 
 
 #include <string>
+#include <fstream>
+#include <iostream>
 #include "customMusic.h"
 using namespace std;
 
 
-struct No
-{
+struct No {
     string musica;
     No *proxNo, *antNo;
 };
 
-class PlayList{
+class PlayList {
 
 
 
     No * primeiro;
     No * ultimo;
     int tamanho;
+    string nome;
 
 
-    void inserirListaVazia(string musica){
+    void inserirListaVazia(string musica) {
         No * novo = new No;
 
         novo->musica = musica;
@@ -34,20 +36,24 @@ class PlayList{
 
     }
 
-public:
+  public:
 
 
-    PlayList(){
-
+    PlayList(string nome) {
+        this->nome = nome;
         primeiro = NULL;
         ultimo = NULL;
         tamanho = 0;
     }
 
-    int _size(){
+    string getNome(){
+        return nome;
+    }
+
+    int _size() {
         return tamanho;
     }
-    No * operator [] (int i){
+    No * operator [] (int i) {
 
         No * temp = primeiro;
         for(int k = 0; k < i; k++)
@@ -56,12 +62,11 @@ public:
 
     }
 
-    void push_back(string musica){
+    void push_back(string musica) {
 
         if(primeiro == NULL)
             inserirListaVazia(musica);
-        else
-        {
+        else {
             No * novoNo = new No;
 
             novoNo->musica = musica;
@@ -74,9 +79,9 @@ public:
 
     }
 
-    void removerInicio(){
+    void removerInicio() {
         No * temp = primeiro;
-        if(temp != NULL){
+        if(temp != NULL) {
             primeiro = primeiro->proxNo;
             primeiro->antNo = NULL;
             delete temp;
@@ -84,13 +89,13 @@ public:
         }
     }
 
-    void removerFim(){
-        if(tamanho == 1){
+    void removerFim() {
+        if(tamanho == 1) {
             removerInicio();
         }
 
         No * temp = ultimo;
-        if(temp != NULL){
+        if(temp != NULL) {
             ultimo = temp->antNo;
             ultimo->proxNo = NULL;
             delete temp;
@@ -98,19 +103,50 @@ public:
         }
     }
 
-    void removerPosicao(int posicao){
+    void savePlaylist() {
 
-        if(tamanho == 1){
+        std::fstream file("Playlists\\" + nome + ".txt",  ios::out);
+
+        file.seekp(0);
+
+        No * cabeca_de_gelo = primeiro;
+
+        while(cabeca_de_gelo != NULL) {
+            file << cabeca_de_gelo->musica << endl;
+            cabeca_de_gelo = cabeca_de_gelo->proxNo;
+        }
+
+        file.close();
+
+    }
+
+    void load(){
+
+        std::fstream f("Playlists\\" + nome + ".txt",  ios::in);
+
+        string n;
+        while(f.eof() == false){
+
+            getline(f, n);
+            push_back(n);
+        }
+
+    }
+
+
+    void removerPosicao(int posicao) {
+
+        if(tamanho == 1) {
             removerInicio();
             return;
         }
 
-        if(tamanho == posicao + 1){
+        if(tamanho == posicao + 1) {
             removerFim();
             return;
         }
         No * temp = primeiro;
-        for(int i = 0; i < posicao; i++){
+        for(int i = 0; i < posicao; i++) {
             temp = temp->proxNo;
         }
 
@@ -124,58 +160,69 @@ public:
     }
 };
 
-class Tocador{
+class Tocador {
 
     PlayList * playlist;
     No * musica_atual;
     CustomMusic music;
 
 
-public:
+  public:
 
 
-    Tocador(PlayList * playlist){
-        this->playlist = playlist;
-        musica_atual = playlist[0][0];
+    Tocador() {
+        this->playlist = NULL;
+        musica_atual = NULL;
     }
 
-    string getMusicaAtual(){
+    void setPlaylist(PlayList * p){
+        this->playlist = p;
+        init();
+    }
+
+    string getMusicaAtual() {
         return musica_atual->musica;
     }
 
-    bool skip(){
-        if(musica_atual->proxNo != NULL){
+    void init(){
+        if(playlist->_size() > 0){
+            musica_atual = playlist[0][0];
+        }
+    }
+
+    bool skip() {
+        if(musica_atual->proxNo != NULL) {
             musica_atual = musica_atual->proxNo;
             return true;
         }
         return false;
     }
 
-    bool previous(){
-        if(musica_atual->antNo != NULL){
+    bool previous() {
+        if(musica_atual->antNo != NULL) {
             musica_atual = musica_atual->antNo;
             return true;
         }
         return false;
     }
 
-    bool open(){
+    bool open() {
         return music.open(musica_atual->musica);
     }
 
-    bool play(){
-        if(open()){
-            music.play();
-            return true;
-        }
-        return false;
+
+    void play() {
+        open();
+        music.play();
+
     }
 
-    bool pause(){
-
+    void pause() {
         music.pause();
-        return true;
+    }
 
+    void desPause(){
+        music.play();
     }
 
 };

@@ -37,8 +37,10 @@
 		</Unit>
 		<Unit filename="CustomMusic.h" />
 		<Unit filename="FolderScanner.h" />
+		<Unit filename="ListaString.h" />
 		<Unit filename="angra.h" />
 		<Unit filename="asasMorenas.h" />
+		<Unit filename="bandaDjavu.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="silvanoSalles.h" />
 		<Extensions>

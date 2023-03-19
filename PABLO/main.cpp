@@ -22,9 +22,11 @@
 void normal(PlayList * musicas)
 {
 
-    musicas->push_back("musicas/HERE I AM.mp3");
-    musicas->push_back("musicas/asd.mp3");
-    musicas->push_back("musicas/HERE I AM.mp3");
+    std::string folder_path = "musicas";
+
+    FolderScanner scanner;
+    scanner.setPath(folder_path);
+    scanner.scan(&musicas);
 }
 
 void use_argv(PlayList * musicas, int argc, char ** argv)
@@ -47,19 +49,71 @@ void use_argv(PlayList * musicas, int argc, char ** argv)
     println(musicas->_size());
 }
 
+
+std::vector<string> * getPlaylistsSaved(){
+
+    std::vector<string> * vec = new std::vector<string>;
+
+    FolderScanner scanner;
+    scanner.setPath("Playlists");
+    scanner.scan(*vec);
+    return vec;
+
+}
+
+void printPlaylists(const std::vector<string> & vecto){
+
+    for(int i = 0; i < vecto.size(); i++){
+        println(vecto[i]);
+    }
+}
+
 int main(int argc, char ** argv)
 {
-    PlayList playlist;
-    normal(&playlist);
-
-    Tocador tocador(&playlist);
 
 
+    ///AGORA VOCE PODE SALVAR SUAS PLAYLISTS, OBRIGATORIO O NOME DA PLAYLIST NO CONSTRUTOR
+    PlayList playlist("SO AS MELHORES");
+    Tocador tocador;
+    tocador.setPlaylist(&playlist);
+
+    std::vector<string> * vect = getPlaylistsSaved();
+    printPlaylists(*vect);
+
+
+
+    if(argc == 2){
+
+        use_argv(&playlist, argc, argv);
+        tocador.init();
+        while(strcmp(tocador.getMusicaAtual().c_str(), argv[1])){
+            tocador.skip();
+        }
+
+
+    }
+
+    else{
+
+        fstream temp("Playlists\\" + playlist.getNome() + ".txt");
+        if(temp.fail()){
+            normal(&playlist);
+        }
+        else{
+            playlist.load();
+        }
+        temp.close();
+        tocador.init();
+
+    }
+
+
+
+    playlist.savePlaylist();
 
     println(tocador.getMusicaAtual());
-    tocador.open();
-    tocador.skip();
-    tocador.play();
+   // tocador.open();
+    //tocador.play();
 
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
