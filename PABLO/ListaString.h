@@ -6,6 +6,8 @@
 #include <fstream>
 #include <iostream>
 #include "customMusic.h"
+
+
 using namespace std;
 
 
@@ -44,6 +46,11 @@ class PlayList {
         primeiro = NULL;
         ultimo = NULL;
         tamanho = 0;
+    }
+
+    void setNome(string nome){
+        this->nome = nome;
+
     }
 
     string getNome(){

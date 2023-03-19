@@ -489,7 +489,7 @@
 	<sstream>
 	<vector>
 
-1679191725 source:c:\spotify2progold\pablo\main.cpp
+1679197812 source:c:\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -497,6 +497,7 @@
 	<cstring>
 	<windows.h>
 	<dirent.h>
+	"loadPlaylist.h"
 	"CustomMusic.h"
 	"FolderScanner.h"
 	"asasMorenas.h"
@@ -1039,7 +1040,8 @@
 1679190087 c:\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679191677 c:\spotify2progold\pablo\asasmorenas.h
+1679197875 c:\spotify2progold\pablo\asasmorenas.h
+	<dirent.h>
 
 1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
 	"SFML/Graphics.hpp"
@@ -1592,7 +1594,7 @@
 1679186995 d:\projeto ed\spotifygold\pablo\silvanosalles.h
 	"angra.h"
 
-1679196783 source:c:\users\okaua\desktop\spotify2progold\pablo\main.cpp
+1679199132 source:c:\users\okaua\desktop\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -1600,6 +1602,7 @@
 	<cstring>
 	<windows.h>
 	<dirent.h>
+	"loadPlaylist.h"
 	"CustomMusic.h"
 	"FolderScanner.h"
 	"asasMorenas.h"
@@ -2139,29 +2142,29 @@
 	<vector>
 	"ListaString.h"
 
-1679196270 c:\users\okaua\desktop\spotify2progold\pablo\asasmorenas.h
+1679201578 c:\users\okaua\desktop\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
 1679196784 c:\users\okaua\desktop\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679196783 c:\users\okaua\desktop\spotify2progold\pablo\listastring.h
+1679199097 c:\users\okaua\desktop\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
 	"customMusic.h"
 
-1679189704 c:\spotify2progold\pablo\listastring.h
+1679198131 c:\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
 	"customMusic.h"
 
-1679169825 D
+1679185523 D
 
 1679190526 c:\spotify2progold\pablo\angra.h
 
-1679196457 c:\spotify2progold\pablo\bandadjavu.h
+1679198492 c:\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
 1679186951 d:\projeto ed\spotifygold\pablo\listastring.h
@@ -2176,8 +2179,18 @@
 
 1679185523 d:\projeto ed\spotifygold\pablo\angra.h
 
-1679196783 c:\users\okaua\desktop\spotify2progold\pablo\angra.h
+1679205318 c:\users\okaua\desktop\spotify2progold\pablo\angra.h
 
-1679196783 c:\users\okaua\desktop\spotify2progold\pablo\bandadjavu.h
+1679199097 c:\users\okaua\desktop\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
+
+1679196783 
+
+1679197587 c:\spotify2progold\pablo\loadplaylist.h
+	<sys/stat.h>
+
+1679197587 aff749f237194d30bf69f101be351a66daf72
+
+1679198207 c:\users\okaua\desktop\spotify2progold\pablo\loadplaylist.h
+	<sys/stat.h>
 

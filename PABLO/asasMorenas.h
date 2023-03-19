@@ -13,6 +13,7 @@ class negocioDoLado{
     sf::Text inicio;
     sf::Text buscar;
     sf::Text sua_bib;
+    sf::Text sua_play;
     sf::Font arial;
 
     sf::Texture homTex;
@@ -22,8 +23,10 @@ class negocioDoLado{
     sf::Sprite lupSpr;
 
     sf::Texture bibT;
-
     sf::Sprite bibSpr;
+
+    sf::Texture playT;
+    sf::Sprite playSpr;
 
     sf::Texture logoT;
     sf::Sprite logoSpr;
@@ -87,6 +90,16 @@ public:
         sua_bib.setString("Sua Biblioteca");
         sua_bib.setPosition(tposx,posY * 4);
 
+        playT.loadFromFile("assets/createPlaylist.png");
+        playSpr.setTexture(playT);
+        playSpr.setPosition(sprX,posY * 5.5);
+
+        sua_play.setColor(sf::Color(255,255,255));
+        sua_play.setFont(arial);
+        sua_play.setCharacterSize(csize);
+        sua_play.setString("Criar playlist");
+        sua_play.setPosition(tposx,posY * 5.5);
+
         float psize = wid/12;
         int pposx = posX * 1.2;
         for(int i=0; i<plists.size();i++){
@@ -94,10 +107,13 @@ public:
             playlists[i].setFont(arial);
             playlists[i].setCharacterSize(psize);
             playlists[i].setString(plists[i]);
-            playlists[i].setPosition(pposx,posY*5 + (i *playlists[0].getGlobalBounds().height * 4));
+            playlists[i].setPosition(pposx,posY*6.5 + (i *playlists[0].getGlobalBounds().height * 4));
         }
     }
 
+    sf::Vector2f getSize(){
+        return sf::Vector2f(wid * 1.333,hei);
+    }
     void show(sf::RenderWindow& window){
         window.draw(background);
         window.draw(logoSpr);
@@ -107,6 +123,8 @@ public:
         window.draw(lupSpr);
         window.draw(bibSpr);
         window.draw(sua_bib);
+        window.draw(playSpr);
+        window.draw(sua_play);
         for(int i=0; i<plists.size();i++){
             window.draw(playlists[i]);
         }
