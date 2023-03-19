@@ -308,6 +308,74 @@ class loopButton {
 
 };
 
+class Timer{
+
+    sf::Font font;
+    sf::Text text;
+
+    string ajudarFormato(int value){
+        string m;
+        if( value >= 10){
+            m = std::to_string(value);
+        }
+        else{
+            m = "0" + std::to_string(value);
+        }
+
+        return m;
+
+    }
+
+public:
+    Timer(sf::Font font){
+        this->font = font;
+        text.setFont(this->font);
+    }
+
+    Timer(){
+        text.setString("99:99");
+    }
+
+    void setFont(sf::Font & font){
+        text.setFont(font);
+    }
+
+    void setPosition(float x, float y){
+        text.setPosition(x, y);
+    }
+
+    void setPosition(sf::Vector2f pos){
+        text.setPosition(pos);
+    }
+
+    void setCharacterSize(unsigned int size){
+        text.setCharacterSize(size);
+    }
+
+    float getWidth(){
+        return text.getGlobalBounds().width;
+    }
+    float getHeight(){
+        return text.getGlobalBounds().width;
+    }
+
+
+    void update(const sf::Time & time){
+
+        string texto;
+        int minutes = (int)time.asSeconds() / 60;
+        int seconds = (int)time.asSeconds() % 60;
+        texto = ajudarFormato(minutes) + ":" + ajudarFormato(seconds);
+        text.setString(texto);
+
+    }
+
+    void show(sf::RenderWindow & window){
+        window.draw(text);
+    }
+
+};
+
 class Jogador {
   public:
 
@@ -326,6 +394,9 @@ class Jogador {
     PlayButton pButton;
     BotaoAvancar bAvancar;
     BotaoVoltar bVoltar;
+    Timer ltimer;
+    Timer rtimer;
+
     sf::CircleShape voltar;
     sf::RectangleShape quadVol;
 
@@ -335,13 +406,22 @@ class Jogador {
     ONegocioQueFicaGrande negQficaGrande;
     Tocador * tocador;
 
-
+    sf::Font f;
 
     Jogador() {
 
         back.setSize(sf::Vector2f(recWid,recHei));
         back.setPosition(0,HEIGHT - recHei);
         back.setFillColor(sf::Color(50,50,50));
+
+        f.loadFromFile("fontes/arial.ttf");
+        ltimer.setFont(f);
+        rtimer.setFont(f);
+        ltimer.setCharacterSize(HEIGHT / 80);
+        rtimer.setCharacterSize(HEIGHT / 80);
+
+        ltimer.setPosition(negQficaGrande.getPosition().x - ltimer.getWidth() * 1.4, negQficaGrande.getPosition().y - 3);
+        rtimer.setPosition(negQficaGrande.getPosition().x + negQficaGrande.getSize().x + ltimer.getWidth() * 0.4, negQficaGrande.getPosition().y - 3);
 
     }
 
@@ -357,6 +437,8 @@ class Jogador {
         negQficaGrande.show(window);
         rButton.show(window);
         lButton.show(window);
+        ltimer.show(window);
+        rtimer.show(window);
     }
     void handleEvent(sf::RenderWindow& window,sf::Event event,const sf::Vector2f& mouse,bool& trocou) {
         if (event.type == sf::Event::MouseButtonPressed) {
@@ -441,5 +523,6 @@ class Jogador {
 
 
 };
+
 
 #endif // ANGRA_H_INCLUDED

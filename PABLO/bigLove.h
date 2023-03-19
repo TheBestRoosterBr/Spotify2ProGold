@@ -153,6 +153,9 @@ void seePlaylist(sf::RenderWindow &window,string playList)
         jogador.bVoltar.hover(mouse);
         jogador.negQficaGrande.hover(mouse,window);
 
+        jogador.ltimer.update(sf::seconds(jogador.tocador->getMusicPosicion()));
+        jogador.rtimer.update(sf::seconds(jogador.tocador->getMusicDuration()));
+
         if(jogador.tocador->music->getStatus() != sf::Music::Playing && jogador.tocador->music->getStatus() != sf::Music::Paused){
 
             if(jogador.lButton.getValue()){

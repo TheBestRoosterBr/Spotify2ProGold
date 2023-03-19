@@ -44,6 +44,25 @@ void homePage(sf::RenderWindow &window) {
         jogador.bVoltar.hover(mouse);
         jogador.negQficaGrande.hover(mouse,window);
 
+
+        jogador.ltimer.update(sf::seconds(jogador.tocador->getMusicPosicion()));
+        jogador.rtimer.update(sf::seconds(jogador.tocador->getMusicDuration()));
+
+        if(jogador.tocador->music->getStatus() != sf::Music::Playing && jogador.tocador->music->getStatus() != sf::Music::Paused){
+
+            if(jogador.lButton.getValue()){
+                jogador.tocador->music->setPosition(sf::seconds(0));
+                jogador.tocador->play();
+            }
+            else{
+                jogador.tocador->skip(jogador.rButton.getValue());
+                jogador.tocador->play();
+
+            }
+
+        }
+
+
         window.clear();
 
         window.draw(background);

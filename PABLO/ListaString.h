@@ -243,7 +243,10 @@ class Tocador {
     }
 
     bool open() {
-        return music->open(musica_atual->musica);
+         if(!music->open(musica_atual->musica)){
+
+         }
+         return false;
     }
 
     void update(){

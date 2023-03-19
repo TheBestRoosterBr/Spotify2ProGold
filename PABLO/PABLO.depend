@@ -2751,7 +2751,7 @@
 	<vector>
 	"ListaString.h"
 
-1679256010 d:\projeto ed\spotifygold\spotify2progold\pablo\listastring.h
+1679261029 d:\projeto ed\spotifygold\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
@@ -2760,15 +2760,15 @@
 1679254210 d:\projeto ed\spotifygold\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
-1679254472 d:\projeto ed\spotifygold\spotify2progold\pablo\silvanosalles.h
+1679260523 d:\projeto ed\spotifygold\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679252160 d:\projeto ed\spotifygold\spotify2progold\pablo\angra.h
+1679260362 d:\projeto ed\spotifygold\spotify2progold\pablo\angra.h
 
-1679255520 d:\projeto ed\spotifygold\spotify2progold\pablo\bandadjavu.h
+1679261105 d:\projeto ed\spotifygold\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
-1679255123 d:\projeto ed\spotifygold\spotify2progold\pablo\biglove.h
+1679261114 d:\projeto ed\spotifygold\spotify2progold\pablo\biglove.h
 	"angra.h"
 	"ListaString.h"
 
