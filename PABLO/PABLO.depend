@@ -489,7 +489,7 @@
 	<sstream>
 	<vector>
 
-1679191725 source:c:\spotify2progold\pablo\main.cpp
+1679197812 source:c:\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -497,6 +497,7 @@
 	<cstring>
 	<windows.h>
 	<dirent.h>
+	"loadPlaylist.h"
 	"CustomMusic.h"
 	"FolderScanner.h"
 	"asasMorenas.h"
@@ -1039,7 +1040,7 @@
 1679190087 c:\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679197587 c:\spotify2progold\pablo\asasmorenas.h
+1679197875 c:\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
 1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
@@ -2147,7 +2148,7 @@
 	<string>
 	"customMusic.h"
 
-1679197414 c:\spotify2progold\pablo\listastring.h
+1679198131 c:\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
@@ -2157,7 +2158,7 @@
 
 1679190526 c:\spotify2progold\pablo\angra.h
 
-1679196457 c:\spotify2progold\pablo\bandadjavu.h
+1679198492 c:\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
 1679186951 d:\projeto ed\spotifygold\pablo\listastring.h
@@ -2171,4 +2172,7 @@
 1679169825 78c9828d44c0e32c47df03caef121ae4a06a4
 
 1679185523 d:\projeto ed\spotifygold\pablo\angra.h
+
+1679197587 c:\spotify2progold\pablo\loadplaylist.h
+	<sys/stat.h>
 

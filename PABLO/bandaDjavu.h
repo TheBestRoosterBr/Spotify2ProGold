@@ -41,6 +41,13 @@ void createPlaylist(sf::RenderWindow &window)
     nomenome.setPosition(sf::Vector2f(nome.getPosition().x,nome.getPosition().y - nome.getGlobalBounds().height/2));
     nomenome.setString("nome:");
 
+    sf::Text vamos;
+    vamos.setFont(arial);
+    vamos.setCharacterSize(WIDTH/50);
+    vamos.setFillColor(sf::Color::White);
+    vamos.setPosition(sf::Vector2f(negocio.getSize().x + vamos.getGlobalBounds().width/4,quadradoDecima.getGlobalBounds().height));
+    vamos.setString("Vamos incrementar sua playlist");
+
     std::vector <string> musicas;
 
 
@@ -179,7 +186,7 @@ void createPlaylist(sf::RenderWindow &window)
         nome.setString(name);
 
         window.draw(nome);
-
+        window.draw(vamos);
         if(trocarNome)
         {
             window.draw(nomenome);
