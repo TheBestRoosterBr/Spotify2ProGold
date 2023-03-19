@@ -10,25 +10,25 @@ vector<string> get_filenames(const char* dir_path) {
     DIR* dir;
     struct dirent* entry;
 
-    // Abre o diretório
+    // Abre o diretï¿½rio
     dir = opendir(dir_path);
 
-    // Verifica se o diretório foi aberto com sucesso
+    // Verifica se o diretï¿½rio foi aberto com sucesso
     if (dir == NULL) {
-        cerr << "Erro ao abrir o diretório: " << dir_path << endl;
+        cerr << "Erro ao abrir o diretï¿½rio: " << dir_path << endl;
         return filenames;
     }
 
-    // Lê os arquivos do diretório e adiciona seus nomes ao vetor
+    // Lï¿½ os arquivos do diretï¿½rio e adiciona seus nomes ao vetor
     while ((entry = readdir(dir)) != NULL) {
-        // Obtém as informações do arquivo
+        // Obtï¿½m as informaï¿½ï¿½es do arquivo
         struct stat file_stat;
         string file_path = string(dir_path) + "/" + string(entry->d_name);
         if (stat(file_path.c_str(), &file_stat) < 0) {
             continue;
         }
 
-        // Verifica se o arquivo é regular
+        // Verifica se o arquivo ï¿½ regular
         if (S_ISREG(file_stat.st_mode)) {
             string filename = string(entry->d_name);
             size_t pos = filename.find_last_of(".");
@@ -39,14 +39,14 @@ vector<string> get_filenames(const char* dir_path) {
         }
     }
 
-    // Fecha o diretório
+    // Fecha o diretï¿½rio
     closedir(dir);
 
     return filenames;
 }
 
 void viewNames() {
-    const char* dir_path = "Playlists"; // Substitua pelo caminho do diretório desejado
+    const char* dir_path = "Playlists"; // Substitua pelo caminho do diretï¿½rio desejado
 
     vector<string> filenames = get_filenames(dir_path);
 
@@ -58,3 +58,4 @@ void viewNames() {
 }
 
 #endif // LOADPLAYLIST_H_INCLUDED
+

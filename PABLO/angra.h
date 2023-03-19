@@ -202,6 +202,36 @@ public:
     }
 
 };
+class randomButton{
+    sf::Texture randomT;
+    sf::Sprite randomSpr;
+public:
+    randomButton(){
+        randomT.loadFromFile("assets/random.png");
+        randomSpr.setTexture(randomT);
+        randomSpr.setPosition(sf::Vector2f(WIDTH/3.5, HEIGHT/10));
+    }
+    void visualmentos(sf::RenderWindow& window){
+        window.draw(randomSpr);
+    }
+
+};
+
+class loopButton{
+    sf::Texture loopT;
+    sf::Sprite loopSpr;
+public:
+    loopButton(){
+        loopT.loadFromFile("assets/loop.png");
+        loopSpr.setTexture(loopT);
+        loopSpr.setPosition(sf::Vector2f(WIDTH/3.5, HEIGHT/10));
+    }
+    void visualmentos(sf::RenderWindow& window){
+        window.draw(loopSpr);
+    }
+
+};
+
 class Jogador{
 public:
 
@@ -222,6 +252,9 @@ public:
     BotaoVoltar bVoltar;
     sf::CircleShape voltar;
     sf::RectangleShape quadVol;
+
+    randomButton rButton;
+    loopButton lButton;
 
     ONegocioQueFicaGrande negQficaGrande;
     Tocador * tocador;
@@ -246,6 +279,8 @@ public:
         bAvancar.show(window);
         bVoltar.show(window);
         negQficaGrande.show(window);
+        rButton.visualmentos(window);
+        lButton.visualmentos(window);
     }
 
 
