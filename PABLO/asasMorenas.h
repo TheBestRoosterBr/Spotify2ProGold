@@ -36,7 +36,7 @@ class negocioDoLado {
     std::vector <string> plists  = get_filenames("Playlists");
     sf::Text* playlists = new sf::Text[plists.size()];
 
-  public:
+public:
     negocioDoLado() {
 
 

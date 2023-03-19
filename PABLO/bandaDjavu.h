@@ -5,18 +5,8 @@
 
 void createPlaylist(sf::RenderWindow &window) {
     Jogador jogador;
-    Tocador tocador;
-
-    PlayList playlist("SO AS MELHORES");
-    playlist.load();
-
-
-    tocador.setPlaylist(&playlist);
     jogador.setTocador(&tocador);
 
-    jogador.tocador->init();
-    jogador.tocador->update();
-    jogador.tocador->play();
 
     PlayList newPlaylist;
 
@@ -74,7 +64,10 @@ void createPlaylist(sf::RenderWindow &window) {
     std::vector <string> musicas;
     std::vector <sf::Text> musgasAdds;
 
-    scan.setPath("musicas");
+    if(argumentos == 1)
+        scan.setPath("musicas");
+    else
+        scan.setPath(arq);
 
     scan.scan(musicas);
 
@@ -190,7 +183,17 @@ void createPlaylist(sf::RenderWindow &window) {
 
                             newPlaylist.push_back("musicas\\" + musicas[i]);
                             newPlaylist.savePlaylist();
+                            sf::Text txt;
+                            txt.setFont(arial);
+                            txt.setCharacterSize(WIDTH/75);
+                            txt.setFillColor(sf::Color::White);
+                            txt.setString(musicas[i]);
+                            txt.setPosition(sf::Vector2f(
+                                negocio.getSize().x,
+                                quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size()
+                            ));
 
+                            musgasAdds.push_back(txt);
                         }
                     }
 

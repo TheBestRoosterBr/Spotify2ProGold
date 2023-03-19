@@ -45,7 +45,24 @@ class PlayButton {
 
     void setPosition(sf::Vector2f position) {
 
+        circle.setPosition(sf::Vector2f(
+            position.x - circle.getRadius(),
+            position.y + circle.getRadius()
+        ));
 
+        triangle.setPosition(sf::Vector2f(
+            position.x + triangle.getGlobalBounds().width/1.5,
+            position.y + circle.getRadius() + triangle.getGlobalBounds().height/2
+        ));
+
+        recs[0].setPosition(sf::Vector2f(
+            position.x - (circle.getRadius()/2)/1.5,
+            position.y + circle.getRadius() + circle.getRadius()/2
+        ));
+        recs[1].setPosition(sf::Vector2f(
+            position.x + (circle.getRadius()/2)/2,
+            position.y + circle.getRadius() + circle.getRadius()/2
+        ));
     }
 
     void setSize(float radius) {

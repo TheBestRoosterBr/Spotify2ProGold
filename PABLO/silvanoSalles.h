@@ -7,13 +7,7 @@ void homePage(sf::RenderWindow &window) {
 
     negocioDoLado negocio;
     Jogador jogador;
-    Tocador tocador;
 
-    PlayList playlist("SO AS MELHORES");
-    playlist.load();
-
-
-    tocador.setPlaylist(&playlist);
     jogador.setTocador(&tocador);
 
     jogador.tocador->init();
