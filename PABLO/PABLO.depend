@@ -1040,7 +1040,7 @@
 
 1679168548 c:\spotify2progold\pablo\asasmorenas.h
 
-1679185802 source:d:\projeto ed\spotifygold\pablo\main.cpp
+1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -1588,7 +1588,7 @@
 
 1679185523 d:\projeto ed\spotifygold\pablo\asasmorenas.h
 
-1679185859 d:\projeto ed\spotifygold\pablo\silvanosalles.h
+1679186995 d:\projeto ed\spotifygold\pablo\silvanosalles.h
 	"angra.h"
 
 1679063679 source:c:\users\okaua\desktop\spotify2progold\pablo\main.cpp
@@ -2157,7 +2157,7 @@
 
 1679175880 c:\spotify2progold\pablo\bandadjavu.h
 
-1679185879 d:\projeto ed\spotifygold\pablo\listastring.h
+1679186951 d:\projeto ed\spotifygold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>

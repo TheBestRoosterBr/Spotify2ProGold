@@ -72,18 +72,6 @@ int main(int argc, char ** argv)
 {
 
 
-    Tocador tocador;
-    PlayList playlist("SO AS MELHORES");
-
-    playlist.load();
-
-    tocador.setPlaylist(&playlist);
-
-    tocador->init();
-    tocador->play();
-
-
-
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     window.setFramerateLimit(22);

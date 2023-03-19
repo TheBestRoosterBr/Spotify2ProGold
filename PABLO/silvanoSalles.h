@@ -15,6 +15,7 @@ void homePage(sf::RenderWindow &window) {
     jogador.setTocador(&tocador);
 
     jogador.tocador->init();
+    jogador.tocador->update();
     jogador.tocador->play();
 
 
@@ -39,7 +40,14 @@ void homePage(sf::RenderWindow &window) {
                 {
 
                     if(jogador.bAvancar.hover(mouse)){
-                        jogador.tocador->skip();
+                            jogador.tocador->skip();
+
+                    }
+
+                    if(jogador.bVoltar.hover(mouse)){
+
+                        jogador.tocador->previous();
+
                     }
 
                     if(jogador.pButton.hover(mouse)){

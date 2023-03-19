@@ -165,7 +165,7 @@ class Tocador {
 
     PlayList * playlist;
     No * musica_atual;
-    CustomMusic music;
+    CustomMusic * music;
 
 
   public:
@@ -174,6 +174,7 @@ class Tocador {
     Tocador() {
         this->playlist = NULL;
         musica_atual = NULL;
+        music = new CustomMusic;
     }
 
     void setPlaylist(PlayList * p){
@@ -193,6 +194,8 @@ class Tocador {
     bool skip() {
         if(musica_atual->proxNo != NULL) {
             musica_atual = musica_atual->proxNo;
+            update();
+            play();
             return true;
         }
         return false;
@@ -201,28 +204,34 @@ class Tocador {
     bool previous() {
         if(musica_atual->antNo != NULL) {
             musica_atual = musica_atual->antNo;
+            update();
+            play();
             return true;
         }
         return false;
     }
 
     bool open() {
-        return music.open(musica_atual->musica);
+        return music->open(musica_atual->musica);
     }
 
-
+    void update(){
+        delete music;
+        music = new CustomMusic;
+        music->open(musica_atual->musica);
+    }
     void play() {
-        open();
-        music.play();
+
+        music->play();
 
     }
 
     void pause() {
-        music.pause();
+        music->pause();
     }
 
     void desPause(){
-        music.play();
+        music->play();
     }
 
 };
