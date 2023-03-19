@@ -209,9 +209,9 @@ public:
     randomButton(){
         randomT.loadFromFile("assets/random.png");
         randomSpr.setTexture(randomT);
-        randomSpr.setPosition(sf::Vector2f(WIDTH/3.5, HEIGHT/10));
+        randomSpr.setPosition(sf::Vector2f((WIDTH/6)*2.3, (HEIGHT/24)*21.4));
     }
-    void visualmentos(sf::RenderWindow& window){
+    void show(sf::RenderWindow& window){
         window.draw(randomSpr);
     }
 
@@ -224,9 +224,9 @@ public:
     loopButton(){
         loopT.loadFromFile("assets/loop.png");
         loopSpr.setTexture(loopT);
-        loopSpr.setPosition(sf::Vector2f(WIDTH/3.5, HEIGHT/10));
+        loopSpr.setPosition(sf::Vector2f((WIDTH/6)*3.56, (HEIGHT/24)*21.5));
     }
-    void visualmentos(sf::RenderWindow& window){
+    void show(sf::RenderWindow& window){
         window.draw(loopSpr);
     }
 
@@ -279,8 +279,8 @@ public:
         bAvancar.show(window);
         bVoltar.show(window);
         negQficaGrande.show(window);
-        rButton.visualmentos(window);
-        lButton.visualmentos(window);
+        rButton.show(window);
+        lButton.show(window);
     }
 
 

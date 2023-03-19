@@ -115,6 +115,7 @@ void createPlaylist(sf::RenderWindow &window)
 
         mouse.x = sf::Mouse::getPosition(window).x;
         mouse.y = sf::Mouse::getPosition(window).y;
+
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -173,6 +174,7 @@ void createPlaylist(sf::RenderWindow &window)
                 {
                     recMusga[i].setFillColor(sf::Color(255,255,255,20));
                 }
+
                 if(addMusga[i].getGlobalBounds().contains(mouse))
                 {
                     addMusga[i].setCharacterSize(WIDTH/70);
