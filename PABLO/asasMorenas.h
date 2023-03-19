@@ -1,6 +1,8 @@
 #ifndef ASASMORENAS_H_INCLUDED
 #define ASASMORENAS_H_INCLUDED
 
+#include <dirent.h>
+
 class negocioDoLado{
 
     int wid = WIDTH/8;
@@ -25,6 +27,9 @@ class negocioDoLado{
 
     sf::Texture logoT;
     sf::Sprite logoSpr;
+
+    std::vector <string> plists  = get_filenames("Playlists");
+    sf::Text* playlists = new sf::Text[plists.size()];
 
 public:
     negocioDoLado(){
@@ -82,11 +87,15 @@ public:
         sua_bib.setString("Sua Biblioteca");
         sua_bib.setPosition(tposx,posY * 4);
 
-
-    }
-
-    sf::Vector2f getSize(){
-        return sf::Vector2f(wid * 1.33,hei);
+        float psize = wid/12;
+        int pposx = posX * 1.2;
+        for(int i=0; i<plists.size();i++){
+            playlists[i].setColor(sf::Color(255,255,255));
+            playlists[i].setFont(arial);
+            playlists[i].setCharacterSize(psize);
+            playlists[i].setString(plists[i]);
+            playlists[i].setPosition(pposx,posY*5 + (i *playlists[0].getGlobalBounds().height * 4));
+        }
     }
 
     void show(sf::RenderWindow& window){
@@ -98,6 +107,9 @@ public:
         window.draw(lupSpr);
         window.draw(bibSpr);
         window.draw(sua_bib);
+        for(int i=0; i<plists.size();i++){
+            window.draw(playlists[i]);
+        }
 
     }
 
