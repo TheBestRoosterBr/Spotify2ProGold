@@ -48,6 +48,13 @@ class PlayList {
         tamanho = 0;
     }
 
+    PlayList() {
+        this->nome = "";
+        primeiro = NULL;
+        ultimo = NULL;
+        tamanho = 0;
+    }
+
     void setNome(string nome){
         this->nome = nome;
 

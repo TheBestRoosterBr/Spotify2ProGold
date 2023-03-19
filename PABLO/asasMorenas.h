@@ -103,12 +103,13 @@ public:
 
         float psize = wid/12;
         int pposx = posX * 1.2;
-        for(int i=0; i<plists.size();i++){
+        println(plists.size());
+        for(int i=0; i < plists.size();i++){
             playlists[i].setColor(sf::Color(255,255,255));
             playlists[i].setFont(arial);
             playlists[i].setCharacterSize(psize);
             playlists[i].setString(plists[i]);
-            playlists[i].setPosition(pposx,posY*6.5 + (i *playlists[0].getGlobalBounds().height * 4));
+            playlists[i].setPosition(pposx,posY * 6 + (i * playlists[i].getGlobalBounds().height * 4));
         }
     }
 

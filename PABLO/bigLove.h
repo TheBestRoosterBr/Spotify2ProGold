@@ -3,25 +3,25 @@
 
 #include "angra.h"
 
-void seePlaylist(sf::RenderWindow &window,PlayList playlist)
+void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
 {
     Jogador jogador;
     Tocador tocador;
 
-    PlayList playlist("SO AS MELHORES");
-    playlist.load();
+    playlist->load();
 
 
-    tocador.setPlaylist(&playlist);
+
+    tocador.setPlaylist(playlist);
     jogador.setTocador(&tocador);
+
 
     jogador.tocador->init();
     jogador.tocador->update();
+    jogador.tocador->open();
     jogador.tocador->play();
 
-
     bool trocou = false;
-
 
     negocioDoLado negocio;
 
@@ -50,18 +50,15 @@ void seePlaylist(sf::RenderWindow &window,PlayList playlist)
     nome.setCharacterSize(WIDTH/20);
     nome.setFillColor(sf::Color::White);
     nome.setPosition(quadradoDecima.getPosition() + sf::Vector2f(WIDTH/20,WIDTH/20));
-    nome.setString(name);
-
-    bool trocarNome = false;
+    nome.setString(playlist->getNome());
 
 
-    std::vector <string> musicas;
 
-    sf::Text* musgas = new sf::Text[musicas.size()];
-    sf::RectangleShape* recMusga = new sf::RectangleShape[musicas.size()];
+    sf::Text* musgas = new sf::Text[playlist->_size()];
+    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlist->_size()];
 
     int gap = WIDTH/25;
-    for(int i = 0; i < musicas.size(); i++)
+    for(int i = 0; i < playlist->_size(); i++)
     {
         recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
         recMusga[i].setPosition(sf::Vector2f(negocio.getSize().x, gap * i + quadradoDecima.getGlobalBounds().height * 1.2));
@@ -70,10 +67,14 @@ void seePlaylist(sf::RenderWindow &window,PlayList playlist)
         musgas[i].setFont(arial);
         musgas[i].setCharacterSize(WIDTH/75);
         musgas[i].setFillColor(sf::Color::White);
-        musgas[i].setString(musicas[i]);
+
+        std::string temp = playlist[0][i]->musica;
+
+        musgas[i].setString(temp.c_str() + 8);
+
         musgas[i].setPosition(sf::Vector2f(
                                   recMusga[i].getPosition().x + WIDTH/100,
-                                  recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                                  recMusga[i].getPosition().y + musgas[i].getGlobalBounds().height
                               ));
 
 
@@ -117,27 +118,7 @@ void seePlaylist(sf::RenderWindow &window,PlayList playlist)
             }
 
 
-            if(trocarNome)
-            {
-                if (event.type == sf::Event::TextEntered)
-                {
-                    if (event.text.unicode == '\b' && name.size() > 0) // Handle backspace
-                    {
-                        name.pop_back();
-                    }
-                    else if (event.text.unicode == sf::Keyboard::Enter)  // Handle enter key
-                    {
-                        trocarNome = false;
-                    }
-                    else if (event.text.unicode < 128) // Handle input characters
-                    {
-                        name += static_cast<char>(event.text.unicode);
-                    }
-                }
-
-            }
-
-            for(int i = 0; i < musicas.size(); i++)
+            for(int i = 0; i < playlist->_size(); i++)
             {
                 if(recMusga[i].getGlobalBounds().contains(mouse))
                 {
@@ -148,14 +129,6 @@ void seePlaylist(sf::RenderWindow &window,PlayList playlist)
                     recMusga[i].setFillColor(sf::Color(255,255,255,20));
                 }
 
-                if(addMusga[i].getGlobalBounds().contains(mouse))
-                {
-                    addMusga[i].setCharacterSize(WIDTH/70);
-                }
-                else
-                {
-                    addMusga[i].setCharacterSize(WIDTH/75);
-                }
             }
 
             if (event.type == sf::Event::MouseButtonPressed)
@@ -213,15 +186,6 @@ void seePlaylist(sf::RenderWindow &window,PlayList playlist)
 
                     }
 
-                    if(nome.getGlobalBounds().contains(mouse) && trocarNome == false)
-                    {
-                        trocarNome = true;
-                        name = "";
-                    }
-
-
-
-
                 }
             }
 
@@ -242,20 +206,11 @@ void seePlaylist(sf::RenderWindow &window,PlayList playlist)
         window.draw(background);
         window.draw(quadradoDecima);
 
-        nome.setString(name);
-
         window.draw(nome);
-        window.draw(vamos);
 
-
-        if(trocarNome)
-        {
-            window.draw(nomenome);
-        }
-        for(int i = 0; i < musicas.size(); i++)
+        for(int i = 0; i < playlist->_size(); i++)
         {
             window.draw(recMusga[i]);
-            window.draw(addMusga[i]);
             window.draw(musgas[i]);
         }
 

@@ -489,7 +489,7 @@
 	<sstream>
 	<vector>
 
-1679205616 source:c:\spotify2progold\pablo\main.cpp
+1679238343 source:c:\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -503,6 +503,7 @@
 	"asasMorenas.h"
 	"silvanoSalles.h"
 	"bandaDjavu.h"
+	"bigLove.h"
 	"ListaString.h"
 
 1678557504 c:\spotify2progold\pablo\custommusic.h
@@ -1040,7 +1041,7 @@
 1679190087 c:\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679235581 c:\spotify2progold\pablo\asasmorenas.h
+1679236881 c:\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
 1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
@@ -2154,7 +2155,7 @@
 	<iostream>
 	"customMusic.h"
 
-1679198131 c:\spotify2progold\pablo\listastring.h
+1679236027 c:\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
@@ -2164,7 +2165,7 @@
 
 1679233327 c:\spotify2progold\pablo\angra.h
 
-1679233823 c:\spotify2progold\pablo\bandadjavu.h
+1679238164 c:\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
 1679186951 d:\projeto ed\spotifygold\pablo\listastring.h
@@ -2193,4 +2194,7 @@
 
 1679198207 c:\users\okaua\desktop\spotify2progold\pablo\loadplaylist.h
 	<sys/stat.h>
+
+1679238583 c:\spotify2progold\pablo\biglove.h
+	"angra.h"
 
