@@ -46,6 +46,11 @@ class PlayList {
         tamanho = 0;
     }
 
+    void setNome(string nome){
+        this->nome = nome;
+
+    }
+
     string getNome(){
         return nome;
     }
