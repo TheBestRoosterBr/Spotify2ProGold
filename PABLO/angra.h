@@ -43,6 +43,24 @@ public:
 
     }
 
+    void setPosition(sf::Vector2f position){
+
+
+    }
+
+    void setSize(float radius){
+        circle.setRadius(radius);
+        triangle.setRadius(circle.getRadius()/2);
+        int recSize = circle.getRadius()/2;
+        recs[0].setSize(sf::Vector2f(recSize/2,recSize * 2));
+        recs[1].setSize(sf::Vector2f(recSize/2,recSize * 2));
+
+    }
+    void setFillColor(sf::Color color){
+        circle.setFillColor(color);
+
+    }
+
     bool hover(sf::Vector2f mousePos) {
         return circle.getGlobalBounds().contains(mousePos);
     }

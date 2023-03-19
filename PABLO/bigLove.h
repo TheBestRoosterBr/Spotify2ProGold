@@ -2,24 +2,37 @@
 #define BIGLOVE_H_INCLUDED
 
 #include "angra.h"
+#include "ListaString.h"
 
-void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
+void seePlaylist(sf::RenderWindow &window,string playList)
 {
     Jogador jogador;
     Tocador tocador;
 
-    playlist->load();
+    PlayList playlist(playList);
 
+    playlist.load();
 
-
-    tocador.setPlaylist(playlist);
+    tocador.setPlaylist(&playlist);
     jogador.setTocador(&tocador);
 
 
     jogador.tocador->init();
     jogador.tocador->update();
     jogador.tocador->open();
-    jogador.tocador->play();
+    //jogador.tocador->play();
+
+
+    sf::CircleShape circle;
+    sf::CircleShape triangle;
+    sf::RectangleShape recs[2];
+
+
+
+
+
+
+
 
     bool trocou = false;
 
@@ -50,15 +63,15 @@ void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
     nome.setCharacterSize(WIDTH/20);
     nome.setFillColor(sf::Color::White);
     nome.setPosition(quadradoDecima.getPosition() + sf::Vector2f(WIDTH/20,WIDTH/20));
-    nome.setString(playlist->getNome());
+    nome.setString(playlist.getNome());
 
 
 
-    sf::Text* musgas = new sf::Text[playlist->_size()];
-    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlist->_size()];
+    sf::Text* musgas = new sf::Text[playlist._size()];
+    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlist._size()];
 
     int gap = WIDTH/25;
-    for(int i = 0; i < playlist->_size(); i++)
+    for(int i = 0; i < playlist._size(); i++)
     {
         recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
         recMusga[i].setPosition(sf::Vector2f(negocio.getSize().x, gap * i + quadradoDecima.getGlobalBounds().height * 1.2));
@@ -68,7 +81,7 @@ void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
         musgas[i].setCharacterSize(WIDTH/75);
         musgas[i].setFillColor(sf::Color::White);
 
-        std::string temp = playlist[0][i]->musica;
+        std::string temp = playlist[i]->musica;
 
         musgas[i].setString(temp.c_str() + 8);
 
@@ -97,6 +110,10 @@ void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
             {
                 window.close();
             }
+
+            negocio.handleEvents(window,event,mouse);
+
+
             if (event.type == sf::Event::MouseWheelScrolled)
             {
                 if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
@@ -118,7 +135,7 @@ void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
             }
 
 
-            for(int i = 0; i < playlist->_size(); i++)
+            for(int i = 0; i < playlist._size(); i++)
             {
                 if(recMusga[i].getGlobalBounds().contains(mouse))
                 {
@@ -208,7 +225,7 @@ void seePlaylist(sf::RenderWindow &window,PlayList * playlist)
 
         window.draw(nome);
 
-        for(int i = 0; i < playlist->_size(); i++)
+        for(int i = 0; i < playlist._size(); i++)
         {
             window.draw(recMusga[i]);
             window.draw(musgas[i]);

@@ -39,6 +39,8 @@ void homePage(sf::RenderWindow &window) {
                 window.close();
             }
 
+            negocio.handleEvents(window,event,mouse);
+
             if (event.type == sf::Event::MouseButtonPressed){
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
@@ -96,10 +98,13 @@ void homePage(sf::RenderWindow &window) {
         jogador.bAvancar.hover(mouse);
         jogador.bVoltar.hover(mouse);
         jogador.negQficaGrande.hover(mouse,window);
+
         window.clear();
+
         window.draw(background);
         negocio.show(window);
         jogador.show(window);
+
         window.display();
     }
 }

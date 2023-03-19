@@ -14,12 +14,15 @@
 #include "loadPlaylist.h"
 #include "CustomMusic.h"
 #include "FolderScanner.h"
+
+void createPlaylist(sf::RenderWindow &window);
+void seePlaylist(sf::RenderWindow &window,string playList);
+
 #include "asasMorenas.h"
 #include "silvanoSalles.h"
 #include "bandaDjavu.h"
-#include "bigLove.h"
 #include "ListaString.h"
-
+#include "bigLove.h"
 
 
 void normal(PlayList * musicas)
@@ -78,10 +81,7 @@ int main(int argc, char ** argv)
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     window.setFramerateLimit(22);
-    PlayList p("nao");
-
-
-    seePlaylist(window,&p);
+    homePage(window);
 
 
     return 0;

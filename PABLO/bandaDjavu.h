@@ -119,6 +119,9 @@ void createPlaylist(sf::RenderWindow &window) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+
+            negocio.handleEvents(window,event,mouse);
+
             if (event.type == sf::Event::MouseWheelScrolled) {
                 if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
                     if (event.mouseWheelScroll.delta < 0) {
@@ -157,14 +160,16 @@ void createPlaylist(sf::RenderWindow &window) {
 #undef L
             }
 
+            sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
+
             for(int i = 0; i < musicas.size(); i++) {
-                if(recMusga[i].getGlobalBounds().contains(mouse)) {
+                if(recMusga[i].getGlobalBounds().contains(mousePos)) {
                     recMusga[i].setFillColor(sf::Color(255,255,255,40));
                 } else {
                     recMusga[i].setFillColor(sf::Color(255,255,255,20));
                 }
 
-                if(addMusga[i].getGlobalBounds().contains(mouse)) {
+                if(addMusga[i].getGlobalBounds().contains(mousePos)) {
                     addMusga[i].setCharacterSize(WIDTH/70);
                 } else {
                     addMusga[i].setCharacterSize(WIDTH/75);
@@ -177,7 +182,7 @@ void createPlaylist(sf::RenderWindow &window) {
 
                     for(int i = 0; i < musicas.size(); i++) {
 
-                        if(addMusga[i].getGlobalBounds().contains(mouse)) {
+                        if(addMusga[i].getGlobalBounds().contains(mousePos)) {
 
                             newPlaylist.push_back("musicas\\" + musicas[i]);
                             newPlaylist.savePlaylist();

@@ -4,7 +4,8 @@
 
 #include <dirent.h>
 
-class negocioDoLado{
+
+class negocioDoLado {
 
     int wid = WIDTH/8;
     int hei = HEIGHT;
@@ -35,8 +36,8 @@ class negocioDoLado{
     std::vector <string> plists  = get_filenames("Playlists");
     sf::Text* playlists = new sf::Text[plists.size()];
 
-public:
-    negocioDoLado(){
+  public:
+    negocioDoLado() {
 
 
 
@@ -58,7 +59,7 @@ public:
         homTex.loadFromFile("assets/home.png");
         homSpr.setTexture(homTex);
         homSpr.setScale(0.75,0.75);
-        homSpr.setPosition(posX - homSpr.getGlobalBounds().width/6 ,posY * 2);
+        homSpr.setPosition(posX - homSpr.getGlobalBounds().width/6,posY * 2);
 
         int sprX = posX - homSpr.getGlobalBounds().width/6;
         int tposx = posX * 1.2 + homSpr.getGlobalBounds().width;
@@ -73,7 +74,7 @@ public:
         lupT.loadFromFile("assets/lupa.png");
         lupSpr.setTexture(lupT);
 
-        lupSpr.setPosition(sprX ,posY * 3);
+        lupSpr.setPosition(sprX,posY * 3);
 
         buscar.setColor(sf::Color(255,255,255));
         buscar.setFont(arial);
@@ -93,31 +94,84 @@ public:
 
         playT.loadFromFile("assets/createPlaylist.png");
         playSpr.setTexture(playT);
+        playSpr.setScale(1.25,1.25);
+        playSpr.setColor(sf::Color(100,100,100));
         playSpr.setPosition(sprX,posY * 5.5);
 
-        sua_play.setColor(sf::Color(255,255,255));
+        sua_play.setColor(sf::Color(100,100,100));
         sua_play.setFont(arial);
         sua_play.setCharacterSize(csize);
         sua_play.setString("Criar playlist");
         sua_play.setPosition(tposx,posY * 5.5);
 
-        float psize = wid/12;
+        float psize = wid/11;
         int pposx = posX * 1.2;
-        println(plists.size());
-        for(int i=0; i < plists.size();i++){
+
+
+        for(int i=0; i < plists.size(); i++) {
             playlists[i].setColor(sf::Color(255,255,255));
             playlists[i].setFont(arial);
             playlists[i].setCharacterSize(psize);
             playlists[i].setString(plists[i]);
-            playlists[i].setPosition(pposx,posY * 6 + (i * playlists[i].getGlobalBounds().height * 4));
+            playlists[i].setPosition(pposx,posY * 6.5 + (i * psize * 3));
         }
     }
 
-    sf::Vector2f getSize(){
+    sf::Vector2f getSize() {
         return sf::Vector2f(wid * 1.333,hei);
     }
 
-    void show(sf::RenderWindow& window){
+    bool hoverCreatePlaylist(sf::Vector2f mouse) {
+        if(playSpr.getGlobalBounds().contains(mouse) || sua_play.getGlobalBounds().contains(mouse)) {
+            playSpr.setColor(sf::Color(255,255,255));
+            sua_play.setColor(sf::Color(255,255,255));
+            return true;
+        } else {
+            playSpr.setColor(sf::Color(100,100,100));
+            sua_play.setColor(sf::Color(100,100,100));
+            return false;
+        }
+    }
+
+    bool hoverPlaylist(sf::Vector2f mouse, int i) {
+        if(playlists[i].getGlobalBounds().contains(mouse)) {
+            playlists[i].setColor(sf::Color(255,255,255));
+            return true;
+        } else {
+            playlists[i].setColor(sf::Color(100,100,100));
+            return false;
+        }
+    }
+
+    void hover(sf::Vector2f mouse) {
+
+        hoverCreatePlaylist(mouse);
+
+        for(int i=0; i < plists.size(); i++)
+            hoverPlaylist(mouse,i);
+
+    }
+
+    void handleEvents(sf::RenderWindow& window,sf::Event& event,sf::Vector2f mouse) {
+
+        hover(mouse);
+
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                if(hoverCreatePlaylist(mouse)) {
+                    createPlaylist(window);
+                }
+                for(int i=0; i < plists.size(); i++) {
+                    if(hoverPlaylist(mouse,i)) {
+                        seePlaylist(window,plists[i]);
+                    }
+                }
+            }
+        }
+    }
+
+
+    void show(sf::RenderWindow& window) {
         window.draw(background);
         window.draw(logoSpr);
         window.draw(homSpr);
@@ -128,7 +182,8 @@ public:
         window.draw(sua_bib);
         window.draw(playSpr);
         window.draw(sua_play);
-        for(int i=0; i<plists.size();i++){
+
+        for(int i=0; i<plists.size(); i++) {
             window.draw(playlists[i]);
         }
 
