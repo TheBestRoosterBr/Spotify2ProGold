@@ -127,11 +127,11 @@ void createPlaylist(sf::RenderWindow &window)
                 {
                     if (event.mouseWheelScroll.delta > 0)
                     {
-                        yScroll += 100;
+                        yScroll -= 100;
                         movingView.setCenter(WIDTH/2,yScroll);
 
                     }else if(event.mouseWheelScroll.delta < 0){
-                        yScroll -= 100;
+                        yScroll += 100;
                         if(yScroll < HEIGHT/2){
                             yScroll = HEIGHT/2;
 
