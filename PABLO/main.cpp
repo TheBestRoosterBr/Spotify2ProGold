@@ -11,6 +11,11 @@
 #define WIDTH 1280
 #define HEIGHT 720
 
+
+std::string arq = "musicas";
+int argumentos = 1;
+
+
 #include "loadPlaylist.h"
 #include "CustomMusic.h"
 #include "FolderScanner.h"
@@ -18,11 +23,18 @@
 void createPlaylist(sf::RenderWindow &window);
 void seePlaylist(sf::RenderWindow &window,string playList);
 
+
+#include "ListaString.h"
+
+Tocador tocador;
+PlayList playlist("SO AS MELHORES");
+
 #include "asasMorenas.h"
 #include "silvanoSalles.h"
 #include "bandaDjavu.h"
-#include "ListaString.h"
+
 #include "bigLove.h"
+
 
 
 void normal(PlayList * musicas)
@@ -35,10 +47,10 @@ void normal(PlayList * musicas)
     scanner.scan(&musicas);
 }
 
-void use_argv(PlayList * musicas, int argc, char ** argv)
+void use_argv(PlayList * musicas, int argc)
 {
 
-    std::string folder_path = argv[1];
+    std::string folder_path = arq;
 
     for(int i = folder_path.size() - 1; i >= 0; i--){
 
@@ -81,11 +93,18 @@ int main(int argc, char ** argv)
 {
 
 
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
+    playlist.load();
+    tocador.setPlaylist(&playlist);
+
+
+
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
     window.setFramerateLimit(22);
 
     homePage(window);
+
+
 
 
 

@@ -7,14 +7,15 @@
 void seePlaylist(sf::RenderWindow &window,string playList)
 {
 
+    println(playList);
     Jogador jogador;
-    Tocador tocador;
 
-    PlayList playlist(playList);
+    tocador.pause();
 
+    playlist.setNome(playList);
     playlist.load();
 
-    tocador.setPlaylist(&playlist);
+
     jogador.setTocador(&tocador);
 
 
@@ -27,11 +28,6 @@ void seePlaylist(sf::RenderWindow &window,string playList)
     sf::CircleShape circle;
     sf::CircleShape triangle;
     sf::RectangleShape recs[2];
-
-
-
-
-
 
 
 

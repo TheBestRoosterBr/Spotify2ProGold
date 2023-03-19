@@ -119,9 +119,8 @@ class PlayList {
 
     void savePlaylist() {
 
-        std::fstream file("Playlists\\" + nome + ".txt",  ios::out);
+        std::ofstream file("Playlists\\" + nome + ".txt",  ios::out | ios::trunc);
 
-        file.seekp(0);
 
         No * cabeca_de_gelo = primeiro;
 
@@ -208,6 +207,7 @@ class Tocador {
     void setPlaylist(PlayList * p){
         this->playlist = p;
         init();
+        update();
     }
     string getMusicaAtual() {
         return musica_atual->musica;
@@ -229,6 +229,7 @@ class Tocador {
             musica_atual = musica_atual->proxNo;
             return true;
         }
+
         return false;
     }
 
@@ -237,6 +238,7 @@ class Tocador {
             musica_atual = musica_atual->antNo;
             return true;
         }
+
         return false;
     }
 

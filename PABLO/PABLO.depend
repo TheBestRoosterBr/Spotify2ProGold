@@ -2199,7 +2199,7 @@
 	"angra.h"
 	"ListaString.h"
 
-1679245173 source:d:\projeto ed\spotifygold\spotify2progold\pablo\main.cpp
+1679255579 source:d:\projeto ed\spotifygold\spotify2progold\pablo\main.cpp
 	"SFML/Graphics.hpp"
 	<iostream>
 	<vector>
@@ -2210,11 +2210,11 @@
 	"loadPlaylist.h"
 	"CustomMusic.h"
 	"FolderScanner.h"
+	"ListaString.h"
 	"asasMorenas.h"
 	"silvanoSalles.h"
 	"bandaDjavu.h"
 	"bigLove.h"
-	"ListaString.h"
 
 1679235853 d:\projeto ed\spotifygold\spotify2progold\sfml-2.5.1\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -2751,23 +2751,24 @@
 	<vector>
 	"ListaString.h"
 
-1679249409 d:\projeto ed\spotifygold\spotify2progold\pablo\listastring.h
+1679256010 d:\projeto ed\spotifygold\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
 	"customMusic.h"
 
-1679238876 d:\projeto ed\spotifygold\spotify2progold\pablo\asasmorenas.h
+1679254210 d:\projeto ed\spotifygold\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
-1679235853 d:\projeto ed\spotifygold\spotify2progold\pablo\silvanosalles.h
+1679254472 d:\projeto ed\spotifygold\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679249395 d:\projeto ed\spotifygold\spotify2progold\pablo\angra.h
+1679252160 d:\projeto ed\spotifygold\spotify2progold\pablo\angra.h
 
-1679238876 d:\projeto ed\spotifygold\spotify2progold\pablo\bandadjavu.h
+1679255520 d:\projeto ed\spotifygold\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
-1679249569 d:\projeto ed\spotifygold\spotify2progold\pablo\biglove.h
+1679255123 d:\projeto ed\spotifygold\spotify2progold\pablo\biglove.h
 	"angra.h"
+	"ListaString.h"
 

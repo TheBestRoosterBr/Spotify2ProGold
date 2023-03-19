@@ -5,18 +5,8 @@
 
 void createPlaylist(sf::RenderWindow &window) {
     Jogador jogador;
-    Tocador tocador;
-
-    PlayList playlist("SO AS MELHORES");
-    playlist.load();
-
-
-    tocador.setPlaylist(&playlist);
     jogador.setTocador(&tocador);
 
-    jogador.tocador->init();
-    jogador.tocador->update();
-    jogador.tocador->play();
 
     PlayList newPlaylist;
 
@@ -74,7 +64,10 @@ void createPlaylist(sf::RenderWindow &window) {
     std::vector <string> musicas;
 
 
-    scan.setPath("musicas");
+    if(argumentos == 1)
+        scan.setPath("musicas");
+    else
+        scan.setPath(arq);
 
     scan.scan(musicas);
 
