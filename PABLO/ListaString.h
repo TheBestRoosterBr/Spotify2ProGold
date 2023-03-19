@@ -177,12 +177,14 @@ class PlayList {
 
 class Tocador {
 
-    PlayList * playlist;
-    No * musica_atual;
-    CustomMusic * music;
 
 
   public:
+
+
+    PlayList * playlist;
+    No * musica_atual;
+    CustomMusic * music;
 
 
     int getMusicPosicion(){
@@ -190,7 +192,11 @@ class Tocador {
     }
 
     int getMusicDuration(){
-        return music->getDuration().asSeconds() * 2;
+        return music->getDuration().asSeconds();
+    }
+
+    void setPosition(sf::Time time){
+        music->setPosition(time);
     }
 
     Tocador() {
@@ -213,7 +219,12 @@ class Tocador {
         }
     }
 
-    bool skip() {
+    bool skip(bool randon = false) {
+        if(randon){
+            srand(time(NULL));
+            musica_atual = playlist[0][rand() % playlist->_size()];
+            return true;
+        }
         if(musica_atual->proxNo != NULL) {
             musica_atual = musica_atual->proxNo;
             return true;

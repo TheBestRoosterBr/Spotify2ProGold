@@ -2,30 +2,3 @@ musicas\asd.mp3
 musicas\euAmoVoce.mp3
 musicas\HERE I AM.mp3
 musicas\serestaDoParedao.mp3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 50c78c9828d44c0e32c47df03caef121ae4a06a4
-
-
-

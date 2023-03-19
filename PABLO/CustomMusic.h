@@ -24,11 +24,15 @@ public:
             return false;
         }
 
+
+
         // Abre o arquivo MP3 com a biblioteca libmpg123
         if (mpg123_open(m_mh, filename.c_str()) != MPG123_OK)
         {
             return false;
         }
+
+        mpg123_scan(m_mh);
 
         // Obtém as informações do arquivo MP3
         long rate;
@@ -66,6 +70,26 @@ public:
     {
         return m_duration;
     }
+
+    void setPosition(sf::Time position)
+    {
+        off_t totalFrames = mpg123_length(m_mh);
+
+    // Converte a posição para o número de quadros decodificados
+        off_t frameOffset = static_cast<off_t>(position.asSeconds() / 2 * getSampleRate() * getChannelCount());
+
+        // Verifica se a posição é válida
+        if (frameOffset > totalFrames)
+        {
+            frameOffset = totalFrames;
+        }
+
+        // Move a posição atual para o novo frame
+        int result = mpg123_seek(m_mh, frameOffset, SEEK_SET);
+
+
+    }
+
 
 
     int getCurrentTime() const

@@ -74,11 +74,19 @@ void printPlaylists(const std::vector<string> & vecto){
 int main(int argc, char ** argv)
 {
 
-
+//    CustomMusic m;
+//    m.open("musicas\\euAmoVoce.mp3");
+//
+//    m.setPosition(sf::seconds(150));
+//        m.play();
+//
+//    system("pause");
+//
+//    return 0;
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     window.setFramerateLimit(22);
-    PlayList p("nao");
+    PlayList p("SO AS MELHORES");
 
 
     seePlaylist(window,&p);

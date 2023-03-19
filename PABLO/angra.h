@@ -177,17 +177,27 @@ public:
     }
 
 
-    void hover(sf::Vector2f mouse, sf::RenderWindow& window){
+    bool hover(sf::Vector2f mouse, sf::RenderWindow& window){
 
         if(barra.getGlobalBounds().contains(mouse)){
             barraGold.setFillColor(sf::Color(212,175,55));
 
+            return true;
 
         }else{
              barraGold.setFillColor(sf::Color::White);
-
+            return false;
         }
 
+    }
+
+    sf::Vector2f getSize(){
+        return barra.getSize();
+    }
+
+
+    sf::Vector2f getPosition(){
+        return barra.getPosition();
     }
 
     void show(sf::RenderWindow& window){
@@ -202,17 +212,37 @@ public:
     }
 
 };
+
 class randomButton{
     sf::Texture randomT;
     sf::Sprite randomSpr;
+    bool value;
 public:
     randomButton(){
         randomT.loadFromFile("assets/random.png");
         randomSpr.setTexture(randomT);
         randomSpr.setPosition(sf::Vector2f((WIDTH/6)*2.3, (HEIGHT/24)*21.4));
+        value = false;
     }
     void show(sf::RenderWindow& window){
         window.draw(randomSpr);
+    }
+
+    bool hover(const sf::Vector2f & mouse){
+        return randomSpr.getGlobalBounds().contains(mouse);
+    }
+
+    bool getValue(){return value;}
+
+    void setValue(bool value){
+        this->value = value;
+        if(value){
+            sf::Color c(212, 175, 55);
+            randomSpr.setColor(c);
+        }
+        else{
+            randomSpr.setColor(sf::Color::White);
+        }
     }
 
 };
@@ -220,15 +250,41 @@ public:
 class loopButton{
     sf::Texture loopT;
     sf::Sprite loopSpr;
+        bool value;
+
 public:
+
+
+
     loopButton(){
         loopT.loadFromFile("assets/loop.png");
         loopSpr.setTexture(loopT);
         loopSpr.setPosition(sf::Vector2f((WIDTH/6)*3.56, (HEIGHT/24)*21.5));
+        value = false;
     }
     void show(sf::RenderWindow& window){
         window.draw(loopSpr);
     }
+
+    bool hover(const sf::Vector2f & mouse){
+        return loopSpr.getGlobalBounds().contains(mouse);
+    }
+
+    bool getValue(){return value;}
+
+    void setValue(bool value){
+        println("TROCOU");
+        this->value = value;
+        if(value){
+            sf::Color c(212, 175, 55);
+            loopSpr.setColor(c);
+        }
+        else{
+            loopSpr.setColor(sf::Color::White);
+        }
+    }
+
+
 
 };
 
