@@ -74,14 +74,19 @@ void printPlaylists(const std::vector<string> & vecto){
     }
 }
 
+
+
 int main(int argc, char ** argv)
+
 {
 
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
 
     window.setFramerateLimit(22);
+
     homePage(window);
+
 
 
     return 0;

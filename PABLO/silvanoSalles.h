@@ -40,60 +40,11 @@ void homePage(sf::RenderWindow &window) {
             }
 
             negocio.handleEvents(window,event,mouse);
-
-            if (event.type == sf::Event::MouseButtonPressed){
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-
-                    if(jogador.bAvancar.hover(mouse)){
-                            jogador.tocador->skip();
-                            trocou = true;
-                            if(jogador.isPlaying){
-                                jogador.tocador->play();
-                            }
-
-                    }
-
-                    if(jogador.bVoltar.hover(mouse)){
-
-
-                        jogador.tocador->previous();
-                        trocou = true;
-                        if(jogador.isPlaying){
-                                jogador.tocador->play();
-                        }
-
-                    }
-
-                    if(jogador.pButton.hover(mouse)){
-
-                        if(jogador.isPlaying){
-                            jogador.tocador->pause();
-                        }
-                        else {
-                            if(trocou){
-                                jogador.tocador->play();
-                                trocou = false;
-                            }
-                            else{
-                                jogador.tocador->desPause();
-                                trocou = false;
-                            }
-
-                        }
-                        jogador.isPlaying = !jogador.isPlaying;
-
-
-                    }
-
-
-
-                }
-            }
+            jogador.handleEvent(window,event,mouse,trocou);
 
         }
 
-        jogador.negQficaGrande.update(  (double) jogador.tocador->getMusicPosicion() / jogador.tocador->getMusicDuration());
+        jogador.negQficaGrande.update((double)jogador.tocador->getMusicPosicion() / jogador.tocador->getMusicDuration());
 
         jogador.bAvancar.hover(mouse);
         jogador.bVoltar.hover(mouse);

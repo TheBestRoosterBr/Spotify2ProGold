@@ -72,7 +72,10 @@ void createPlaylist(sf::RenderWindow &window) {
 
     FolderScanner scan;
     std::vector <string> musicas;
+
+
     scan.setPath("musicas");
+
     scan.scan(musicas);
 
     sf::Text* musgas = new sf::Text[musicas.size()];
@@ -121,6 +124,7 @@ void createPlaylist(sf::RenderWindow &window) {
             }
 
             negocio.handleEvents(window,event,mouse);
+            jogador.handleEvent(window,event,mouse,trocou);
 
             if (event.type == sf::Event::MouseWheelScrolled) {
                 if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
@@ -190,54 +194,10 @@ void createPlaylist(sf::RenderWindow &window) {
                         }
                     }
 
-
-
-                    if(jogador.bAvancar.hover(mouse)) {
-                        jogador.tocador->skip();
-                        trocou = true;
-                        if(jogador.isPlaying) {
-                            jogador.tocador->play();
-                        }
-
-                    }
-
-                    if(jogador.bVoltar.hover(mouse)) {
-
-
-                        jogador.tocador->previous();
-                        trocou = true;
-                        if(jogador.isPlaying) {
-                            jogador.tocador->play();
-                        }
-
-                    }
-
-                    if(jogador.pButton.hover(mouse)) {
-
-                        if(jogador.isPlaying) {
-                            jogador.tocador->pause();
-                        } else {
-                            if(trocou) {
-                                jogador.tocador->play();
-                                trocou = false;
-                            } else {
-                                jogador.tocador->desPause();
-                                trocou = false;
-                            }
-
-                        }
-                        jogador.isPlaying = !jogador.isPlaying;
-
-
-                    }
-
                     if(nome.getGlobalBounds().contains(mouse) && trocarNome == false) {
                         trocarNome = true;
                         name = "";
                     }
-
-
-
 
                 }
             }
@@ -251,8 +211,6 @@ void createPlaylist(sf::RenderWindow &window) {
         jogador.negQficaGrande.hover(mouse,window);
 
         window.clear();
-
-
 
         window.setView(movingView);
 
