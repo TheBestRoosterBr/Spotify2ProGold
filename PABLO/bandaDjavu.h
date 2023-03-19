@@ -5,14 +5,35 @@
 
 void createPlaylist(sf::RenderWindow &window)
 {
+    Jogador jogador;
+    Tocador tocador;
+
+    PlayList playlist("SO AS MELHORES");
+    playlist.load();
+
+
+    tocador.setPlaylist(&playlist);
+    jogador.setTocador(&tocador);
+
+    jogador.tocador->init();
+    jogador.tocador->update();
+    jogador.tocador->play();
+
+
+    bool trocou = false;
 
 
     negocioDoLado negocio;
 
-    sf::RectangleShape background(sf::Vector2f(WIDTH,HEIGHT));
+    sf::RectangleShape background(sf::Vector2f(WIDTH,HEIGHT * 3));
     background.setFillColor(sf::Color(255,255,255,20));
 
-    sf::RectangleShape quadradoDecima(sf::Vector2f(WIDTH - negocio.getSize().x,(HEIGHT - HEIGHT/6)/2));
+    int yScroll = 0;
+
+    sf::View fixedView(sf::FloatRect(0, 0,WIDTH , HEIGHT));
+    sf::View movingView(sf::FloatRect(0,0 , WIDTH, HEIGHT));
+
+    sf::RectangleShape quadradoDecima(sf::Vector2f(WIDTH - negocio.getSize().x,(HEIGHT - HEIGHT/6)/2.5));
     quadradoDecima.setFillColor(sf::Color(93,90,86));
     quadradoDecima.setPosition(negocio.getSize().x,0);
 
@@ -45,28 +66,45 @@ void createPlaylist(sf::RenderWindow &window)
     vamos.setFont(arial);
     vamos.setCharacterSize(WIDTH/50);
     vamos.setFillColor(sf::Color::White);
-    vamos.setPosition(sf::Vector2f(negocio.getSize().x + vamos.getGlobalBounds().width/4,quadradoDecima.getGlobalBounds().height));
+    vamos.setPosition(sf::Vector2f(negocio.getSize().x * 1.1,quadradoDecima.getGlobalBounds().height ));
     vamos.setString("Vamos incrementar sua playlist");
 
+    FolderScanner scan;
     std::vector <string> musicas;
+    scan.setPath("musicas");
+    scan.scan(musicas);
+
+    sf::Text* musgas = new sf::Text[musicas.size()];
+    sf::RectangleShape* recMusga = new sf::RectangleShape[musicas.size()];
+    sf::Text* addMusga = new sf::Text[musicas.size()];
+
+    int gap = WIDTH/25;
+    for(int i = 0; i < musicas.size(); i++)
+    {
+        recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
+        recMusga[i].setPosition(sf::Vector2f(negocio.getSize().x, gap * i + quadradoDecima.getGlobalBounds().height * 1.2));
+        recMusga[i].setFillColor(sf::Color(255,255,255,20));
+
+        addMusga[i].setFont(arial);
+        addMusga[i].setCharacterSize(WIDTH/75);
+        addMusga[i].setFillColor(sf::Color::White);
+        addMusga[i].setString("Adicionar");
+        addMusga[i].setPosition(sf::Vector2f(
+                                    WIDTH - addMusga[i].getGlobalBounds().width * 1.5,
+                                    recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                                ));
+        musgas[i].setFont(arial);
+        musgas[i].setCharacterSize(WIDTH/75);
+        musgas[i].setFillColor(sf::Color::White);
+        musgas[i].setString(musicas[i]);
+        musgas[i].setPosition(sf::Vector2f(
+                                  recMusga[i].getPosition().x + WIDTH/100,
+                                  recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                              ));
 
 
-    Jogador jogador;
-    Tocador tocador;
+    }
 
-    PlayList playlist("SO AS MELHORES");
-    playlist.load();
-
-
-    tocador.setPlaylist(&playlist);
-    jogador.setTocador(&tocador);
-
-    jogador.tocador->init();
-    jogador.tocador->update();
-    jogador.tocador->play();
-
-
-    bool trocou = false;
 
 
     while (window.isOpen())
@@ -83,6 +121,27 @@ void createPlaylist(sf::RenderWindow &window)
             {
                 window.close();
             }
+            if (event.type == sf::Event::MouseWheelScrolled)
+            {
+                if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+                {
+                    if (event.mouseWheelScroll.delta > 0)
+                    {
+                        yScroll += 100;
+                        movingView.setCenter(WIDTH/2,yScroll);
+
+                    }else if(event.mouseWheelScroll.delta < 0){
+                        yScroll -= 100;
+                        if(yScroll < HEIGHT/2){
+                            yScroll = HEIGHT/2;
+
+                        }
+                        movingView.setCenter(WIDTH/2,yScroll);
+
+                    }
+                }
+            }
+
 
             if(trocarNome)
             {
@@ -91,7 +150,8 @@ void createPlaylist(sf::RenderWindow &window)
                     if (event.text.unicode == '\b' && name.size() > 0) // Handle backspace
                     {
                         name.pop_back();
-                    }else if (event.text.unicode == sf::Keyboard::Enter) // Handle enter key
+                    }
+                    else if (event.text.unicode == sf::Keyboard::Enter)  // Handle enter key
                     {
                         trocarNome = false;
                     }
@@ -101,6 +161,26 @@ void createPlaylist(sf::RenderWindow &window)
                     }
                 }
 
+            }
+
+            for(int i = 0; i < musicas.size(); i++)
+            {
+                if(recMusga[i].getGlobalBounds().contains(mouse))
+                {
+                    recMusga[i].setFillColor(sf::Color(255,255,255,40));
+                }
+                else
+                {
+                    recMusga[i].setFillColor(sf::Color(255,255,255,20));
+                }
+                if(addMusga[i].getGlobalBounds().contains(mouse))
+                {
+                    addMusga[i].setCharacterSize(WIDTH/70);
+                }
+                else
+                {
+                    addMusga[i].setCharacterSize(WIDTH/75);
+                }
             }
 
             if (event.type == sf::Event::MouseButtonPressed)
@@ -177,8 +257,12 @@ void createPlaylist(sf::RenderWindow &window)
         jogador.bAvancar.hover(mouse);
         jogador.bVoltar.hover(mouse);
         jogador.negQficaGrande.hover(mouse,window);
+
         window.clear();
 
+
+
+        window.setView(movingView);
 
         window.draw(background);
         window.draw(quadradoDecima);
@@ -187,13 +271,24 @@ void createPlaylist(sf::RenderWindow &window)
 
         window.draw(nome);
         window.draw(vamos);
+
+
         if(trocarNome)
         {
             window.draw(nomenome);
         }
+        for(int i = 0; i < musicas.size(); i++)
+        {
+            window.draw(recMusga[i]);
+            window.draw(addMusga[i]);
+            window.draw(musgas[i]);
+        }
 
+
+        window.setView(fixedView);
         negocio.show(window);
         jogador.show(window);
+
         window.display();
     }
 }

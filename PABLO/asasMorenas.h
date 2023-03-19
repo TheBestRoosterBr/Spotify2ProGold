@@ -114,6 +114,7 @@ public:
     sf::Vector2f getSize(){
         return sf::Vector2f(wid * 1.333,hei);
     }
+
     void show(sf::RenderWindow& window){
         window.draw(background);
         window.draw(logoSpr);
