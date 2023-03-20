@@ -180,6 +180,7 @@ class PlayList {
         ant->proxNo = dir;
         dir->antNo = ant;
         delete temp;
+        tamanho--;
 
     }
 

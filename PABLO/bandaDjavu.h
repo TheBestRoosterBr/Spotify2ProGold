@@ -2,6 +2,35 @@
 #define DJJUNINHOPORTUGAL_H_INCLUDED
 
 #include "angra.h"
+void atualizarPosicao(std::vector <string> musicas,sf::Text* musgas,sf::RectangleShape* recMusga,sf::Text* addMusga,
+                      double x,double negociox,double gap,double y,sf::Font& font) {
+
+    for(int i = 0; i < musicas.size(); i++) {
+
+        recMusga[i].setSize(sf::Vector2f(x,gap));
+        recMusga[i].setPosition(sf::Vector2f(negociox, gap * i + y * 1.2));
+        recMusga[i].setFillColor(sf::Color(255,255,255,20));
+
+        addMusga[i].setFont(font);
+        addMusga[i].setCharacterSize(WIDTH/75);
+        addMusga[i].setFillColor(sf::Color::White);
+        addMusga[i].setString("Adicionar");
+        addMusga[i].setPosition(sf::Vector2f(
+                                    WIDTH - addMusga[i].getGlobalBounds().width * 1.5,
+                                    recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                                ));
+        musgas[i].setFont(font);
+        musgas[i].setCharacterSize(WIDTH/75);
+        musgas[i].setFillColor(sf::Color::White);
+        musgas[i].setString(musicas[i]);
+        musgas[i].setPosition(sf::Vector2f(
+                                  recMusga[i].getPosition().x + WIDTH/100,
+                                  recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                              ));
+
+    }
+
+}
 
 void createPlaylist(sf::RenderWindow &window) {
     Jogador jogador;
@@ -63,7 +92,7 @@ void createPlaylist(sf::RenderWindow &window) {
     FolderScanner scan;
     std::vector <string> musicas;
     std::vector <sf::Text> musgasAdds;
-    std::vector <sf::RectangleShape> recMusgasAdds;
+    std::vector <sf::Text> remover;
 
     if(argumentos == 1)
         scan.setPath("musicas");
@@ -174,9 +203,45 @@ void createPlaylist(sf::RenderWindow &window) {
                 }
             }
 
+            for(int i = 0; i < remover.size(); i++ ) {
+                if(remover[i].getGlobalBounds().contains(mousePos)) {
+                    remover[i].setCharacterSize(WIDTH/65);
+                } else {
+                    remover[i].setCharacterSize(WIDTH/75);
+                }
+            }
+
+
             if (event.type == sf::Event::MouseButtonPressed) {
                 if (event.mouseButton.button == sf::Mouse::Left) {
 
+                    for(int i = 0; i < newPlaylist._size(); ++i)
+                        println(newPlaylist[i]->musica);
+
+                    for(int i = 0; i < remover.size(); i++) {
+                        if(remover[i].getGlobalBounds().contains(mousePos)) {
+                            newPlaylist.removerPosicao(i);
+                            println("o erro ta na materia?");
+                            newPlaylist.savePlaylist();
+
+                            musgasAdds.erase(musgasAdds.begin()+i);
+                            remover.erase(remover.begin() + i);
+
+
+                            for(int i = 0; i < musgasAdds.size(); i++) {
+                                double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * i * 3;
+                                musgasAdds[i].setPosition(sf::Vector2f(negocio.getSize().x,y));
+                            }
+
+                            double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size() * 3;
+                            atualizarPosicao(musicas,musgas,recMusga, addMusga,
+                                             quadradoDecima.getSize().x,negocio.getSize().x,gap, y,arial);
+
+
+
+
+                        }
+                    }
 
                     for(int i = 0; i < musicas.size(); i++) {
 
@@ -189,40 +254,27 @@ void createPlaylist(sf::RenderWindow &window) {
                             txt.setCharacterSize(WIDTH/75);
                             txt.setFillColor(sf::Color::White);
                             txt.setString(musicas[i]);
-                            txt.setPosition(sf::Vector2f(
-                                                negocio.getSize().x,
-                                                quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * 2 * musgasAdds.size()
-                                            ));
 
+                            double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size() * 3;
+
+                            txt.setPosition(sf::Vector2f(negocio.getSize().x,y));
 
                             musgasAdds.push_back(txt);
 
-                            double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size();
+                            sf::Text remov;
+                            remov.setFont(arial);
+                            remov.setCharacterSize(WIDTH/75);
+                            remov.setFillColor(sf::Color::White);
+                            remov.setString("Remover");
+                            remov.setPosition(sf::Vector2f(WIDTH - remov.getGlobalBounds().width * 1.25,y));
 
-                            for(int i = 0; i < musicas.size(); i++) {
-                                recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
-                                recMusga[i].setPosition(sf::Vector2f(negocio.getSize().x, gap * i + y * 1.2));
-                                recMusga[i].setFillColor(sf::Color(255,255,255,20));
+                            remover.push_back(remov);
 
-                                addMusga[i].setFont(arial);
-                                addMusga[i].setCharacterSize(WIDTH/75);
-                                addMusga[i].setFillColor(sf::Color::White);
-                                addMusga[i].setString("Adicionar");
-                                addMusga[i].setPosition(sf::Vector2f(
-                                                            WIDTH - addMusga[i].getGlobalBounds().width * 1.5,
-                                                            recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
-                                                        ));
-                                musgas[i].setFont(arial);
-                                musgas[i].setCharacterSize(WIDTH/75);
-                                musgas[i].setFillColor(sf::Color::White);
-                                musgas[i].setString(musicas[i]);
-                                musgas[i].setPosition(sf::Vector2f(
-                                                          recMusga[i].getPosition().x + WIDTH/100,
-                                                          recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
-                                                      ));
+                            println("sim eh o taualizafa");
 
 
-                            }
+                            atualizarPosicao(musicas,musgas,recMusga, addMusga,
+                                             quadradoDecima.getSize().x,negocio.getSize().x,gap, y,arial);
 
 
 
@@ -284,6 +336,9 @@ void createPlaylist(sf::RenderWindow &window) {
             window.draw(musgas[i]);
         }
         for(auto i : musgasAdds) {
+            window.draw(i);
+        }
+        for(auto i : remover) {
             window.draw(i);
         }
 
