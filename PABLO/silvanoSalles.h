@@ -10,10 +10,6 @@ void homePage(sf::RenderWindow &window) {
 
     jogador.setTocador(&tocador);
 
-    jogador.tocador->init();
-    jogador.tocador->update();
-    jogador.tocador->play();
-
 
     sf::RectangleShape background(sf::Vector2f(WIDTH,HEIGHT));
     background.setFillColor(sf::Color(255,255,255,20));

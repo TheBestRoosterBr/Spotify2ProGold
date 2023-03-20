@@ -89,18 +89,37 @@ void printPlaylists(const std::vector<string> & vecto){
 
 
 int main(int argc, char ** argv)
-
 {
 
 
 
-    playlist.load();
+    if(argc == 2){
+        arq = argv[1];
+        use_argv(&playlist, argc);
+    }
+    else
+        playlist.load();
     tocador.setPlaylist(&playlist);
+    tocador.init();
+
+
+    if(argc == 2){
+        while(arq.compare(tocador.getMusicaAtual())){
+                println("========================================");
+            println(arq);
+            println(tocador.getMusicaAtual());
+
+            tocador.skip();
+        }
+    }
 
 
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Spotify");
     window.setFramerateLimit(22);
+
+    tocador.update();
+    tocador.play();
 
     homePage(window);
 
