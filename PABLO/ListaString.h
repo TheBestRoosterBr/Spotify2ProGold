@@ -95,10 +95,17 @@ class PlayList {
 
     void removerInicio() {
         No * temp = primeiro;
-        if(temp != NULL) {
+        println(tamanho);
+        if(tamanho == 1){
+            delete primeiro;
+            primeiro = NULL;
+            ultimo = NULL;
+            tamanho--;
+        }
+        else if(temp != NULL) {
             primeiro = primeiro->proxNo;
-            primeiro->antNo = NULL;
             delete temp;
+            primeiro->antNo = NULL;
             tamanho--;
         }
     }
@@ -106,6 +113,7 @@ class PlayList {
     void removerFim() {
         if(tamanho == 1) {
             removerInicio();
+            return;
         }
 
         No * temp = ultimo;
@@ -116,6 +124,8 @@ class PlayList {
             tamanho--;
         }
     }
+
+
 
     void savePlaylist() {
 
@@ -171,6 +181,13 @@ class PlayList {
         dir->antNo = ant;
         delete temp;
 
+    }
+
+    void IWillDestroyTheEntireWorld(){
+            while(tamanho > 0){
+                println(primeiro->musica);
+                removerInicio();
+            }
     }
 };
 

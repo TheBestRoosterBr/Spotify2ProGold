@@ -6,30 +6,9 @@
 
 void seePlaylist(sf::RenderWindow &window,string playList)
 {
-
-    println(playList);
     Jogador jogador;
-
-    tocador.pause();
-
-    playlist.setNome(playList);
-    playlist.load();
-
-
     jogador.setTocador(&tocador);
-
-
-    jogador.tocador->init();
-    jogador.tocador->update();
-    jogador.tocador->open();
     //jogador.tocador->play();
-
-
-    sf::CircleShape circle;
-    sf::CircleShape triangle;
-    sf::RectangleShape recs[2];
-
-
 
     bool trocou = false;
 
@@ -49,6 +28,14 @@ void seePlaylist(sf::RenderWindow &window,string playList)
 
     //sf::RectangleShape foto(WIDTH/8,WIDTH/8);
     //foto.setPosition(quadradoDecima.getPosition() + Vector2f(WIDTH/20,WIDTH/20));
+
+    PlayButton pButton;
+    pButton.setSize(WIDTH/35);
+    pButton.setFillColor(sf::Color(212,175,55));
+    pButton.setPosition(sf::Vector2f(negocio.getSize().x * 1.25,quadradoDecima.getSize().y/2));
+
+
+
 
     sf::Font arial;
     arial.loadFromFile("fontes/arialBold.ttf");
@@ -82,6 +69,8 @@ void seePlaylist(sf::RenderWindow &window,string playList)
 
         std::string temp = playlist[i]->musica;
 
+
+
         musgas[i].setString(temp.c_str() + 8);
 
         musgas[i].setPosition(sf::Vector2f(
@@ -109,6 +98,32 @@ void seePlaylist(sf::RenderWindow &window,string playList)
 
             negocio.handleEvents(window,event,mouse);
 
+            if(event.type == sf::Event::MouseButtonPressed){
+                if(event.mouseButton.button == sf::Mouse::Left){
+
+                    if(pButton.hover(mouse)){
+
+                        jogador.tocador->pause();
+
+                        playlist.setNome(playList);
+                        playlist.IWillDestroyTheEntireWorld();
+
+
+
+                        playlist.load();
+
+                        for(int i = 0; i < playlist._size(); i++){
+                            println(playlist[i]->musica);
+                        }
+
+                        jogador.tocador->init();
+                        jogador.tocador->update();
+                        jogador.tocador->play();
+
+                    }
+
+                }
+            }
 
             if (event.type == sf::Event::MouseWheelScrolled)
             {
@@ -130,10 +145,11 @@ void seePlaylist(sf::RenderWindow &window,string playList)
                         }
                 }
             }
+            sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
 
             for(int i = 0; i < playlist._size(); i++)
             {
-                if(recMusga[i].getGlobalBounds().contains(mouse))
+                if(recMusga[i].getGlobalBounds().contains(mousePos))
                 {
 
                     recMusga[i].setFillColor(sf::Color(255,255,255,40));
@@ -184,9 +200,10 @@ void seePlaylist(sf::RenderWindow &window,string playList)
             window.draw(recMusga[i]);
             window.draw(musgas[i]);
         }
-
+        pButton.show(window,false);
 
         window.setView(fixedView);
+
         negocio.show(window);
         jogador.show(window);
 
