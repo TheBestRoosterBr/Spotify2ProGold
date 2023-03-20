@@ -457,6 +457,7 @@ class Jogador {
         ltimer.show(window);
         rtimer.show(window);
     }
+
     void handleEvent(sf::RenderWindow& window,sf::Event event,const sf::Vector2f& mouse,bool& trocou) {
         if (event.type == sf::Event::MouseButtonPressed) {
 
@@ -480,7 +481,6 @@ class Jogador {
                 }
 
                 if(this->bVoltar.hover(mouse)) {
-
 
                     this->tocador->previous();
                     trocou = true;

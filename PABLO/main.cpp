@@ -22,7 +22,8 @@ int argumentos = 1;
 
 void createPlaylist(sf::RenderWindow &window);
 void seePlaylist(sf::RenderWindow &window,string playList);
-
+void homePage(sf::RenderWindow& window);
+void biblioteca(sf::RenderWindow& window);
 
 #include "ListaString.h"
 
@@ -32,7 +33,7 @@ PlayList playlist("SO AS MELHORES");
 #include "asasMorenas.h"
 #include "silvanoSalles.h"
 #include "bandaDjavu.h"
-
+#include "amadoBatista.h"
 #include "bigLove.h"
 
 

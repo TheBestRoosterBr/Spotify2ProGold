@@ -34,7 +34,7 @@ class negocioDoLado {
     sf::Sprite logoSpr;
 
     std::vector <string> plists  = get_filenames("Playlists");
-    sf::Text* playlists = new sf::Text[plists.size()];
+    std::vector <sf::Text> playlists;
 
 public:
     negocioDoLado() {
@@ -113,13 +113,39 @@ public:
 
 
         for(int i=0; i < plists.size(); i++) {
-            playlists[i].setColor(sf::Color(255,255,255));
-            playlists[i].setFont(arial);
-            playlists[i].setCharacterSize(psize);
-            playlists[i].setString(plists[i]);
-            playlists[i].setPosition(pposx,posY * 6.5 + (i * psize * 3));
+            sf::Text t;
+            t.setColor(sf::Color(255,255,255));
+            t.setFont(arial);
+            t.setCharacterSize(psize);
+            t.setString(plists[i]);
+            t.setPosition(pposx,posY * 6.5 + (i * psize * 3));
+            playlists.push_back(t);
         }
     }
+
+
+    void update (){
+        plists  = get_filenames("Playlists");
+
+
+        float psize = wid/11;
+        int pposx = wid/7 * 1.2;
+        int posY = logoSpr.getGlobalBounds().height/2 + wid/5;
+
+        playlists.clear();
+
+        for(int i=0; i < plists.size(); i++) {
+            sf::Text t;
+            t.setColor(sf::Color(255,255,255));
+            t.setFont(arial);
+            t.setCharacterSize(psize);
+            t.setString(plists[i]);
+            t.setPosition(pposx,posY * 6.5 + (i * psize * 3));
+            playlists.push_back(t);
+        }
+
+    }
+
 
     sf::Vector2f getSize() {
         return sf::Vector2f(wid * 1.333,hei);
@@ -205,6 +231,13 @@ public:
             if (event.mouseButton.button == sf::Mouse::Left) {
                 if(hoverCreatePlaylist(mouse)) {
                     createPlaylist(window);
+                }
+                if(hoverHome(mouse)){
+                    homePage(window);
+                }
+                if(hoverBib(mouse)){
+                    biblioteca(window);
+
                 }
                 for(int i=0; i < plists.size(); i++) {
                     if(hoverPlaylist(mouse,i)) {

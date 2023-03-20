@@ -4,10 +4,13 @@
 #include "angra.h"
 #include "ListaString.h"
 
-void seePlaylist(sf::RenderWindow &window,string playList)
+void seePlaylist(sf::RenderWindow &window,string playlistStr)
 {
     Jogador jogador;
     jogador.setTocador(&tocador);
+
+    PlayList playlistAtual(playlistStr);
+    playlistAtual.load();
     //jogador.tocador->play();
 
     bool trocou = false;
@@ -35,7 +38,7 @@ void seePlaylist(sf::RenderWindow &window,string playList)
     pButton.setPosition(sf::Vector2f(negocio.getSize().x * 1.25,quadradoDecima.getSize().y/2));
 
 
-
+    bool clicou = false;
 
     sf::Font arial;
     arial.loadFromFile("fontes/arialBold.ttf");
@@ -47,16 +50,27 @@ void seePlaylist(sf::RenderWindow &window,string playList)
     nome.setCharacterSize(WIDTH/20);
     nome.setFillColor(sf::Color::White);
     nome.setPosition(quadradoDecima.getPosition() + sf::Vector2f(WIDTH/20,WIDTH/20));
-    nome.setString(playlist.getNome());
+    nome.setString(playlistAtual.getNome());
 
 
+    sf::Texture pent;
+    pent.loadFromFile("assets/pen-to-square-solid.png");
+    sf::Sprite sprPen(pent);
+    sprPen.setScale(0.5,0.5);
+    sprPen.setPosition(sf::Vector2f(WIDTH - sprPen.getGlobalBounds().width * 2,nome.getPosition().y));
 
-    sf::Text* musgas = new sf::Text[playlist._size()];
-    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlist._size()];
+    sf::Texture ttrash;
+    ttrash.loadFromFile("assets/trash-solid.png");
+    sf::Sprite trash(ttrash);
+    trash.setScale(0.5,0.5);
+    trash.setPosition(sf::Vector2f(WIDTH - sprPen.getGlobalBounds().width * 2,nome.getPosition().y + trash.getGlobalBounds().height * 2));
+
+    sf::Text* musgas = new sf::Text[playlistAtual._size()];
+    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlistAtual._size()];
 
     int gap = WIDTH/25;
 
-    for(int i = 0; i < playlist._size(); i++)
+    for(int i = 0; i < playlistAtual._size(); i++)
     {
 
         recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
@@ -67,7 +81,7 @@ void seePlaylist(sf::RenderWindow &window,string playList)
         musgas[i].setCharacterSize(WIDTH/75);
         musgas[i].setFillColor(sf::Color::White);
 
-        std::string temp = playlist[i]->musica;
+        std::string temp = playlistAtual[i]->musica;
 
 
 
@@ -95,19 +109,41 @@ void seePlaylist(sf::RenderWindow &window,string playList)
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-
+             sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
             negocio.handleEvents(window,event,mouse);
+            if(sprPen.getGlobalBounds().contains(mousePos)){
+                sprPen.setColor(sf::Color(212,175,55));
+            }else{
+                sprPen.setColor(sf::Color(255,255,255));
+            }
+
+            if(trash.getGlobalBounds().contains(mousePos)){
+                trash.setColor(sf::Color(212,175,55));
+            }else{
+                trash.setColor(sf::Color(255,255,255));
+            }
 
             if(event.type == sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button == sf::Mouse::Left){
 
+                    if(sprPen.getGlobalBounds().contains(mousePos)){
+                        editPlaylist(window,playlistStr);
+                    }
+
+                    if(trash.getGlobalBounds().contains(mousePos)){
+                       playlistAtual.IWillDestroyTheEntireWorld();
+                       playlistAtual.apagar();
+                       homePage(window);
+
+                    }
                     if(pButton.hover(mouse)){
 
                         jogador.tocador->pause();
 
-                        playlist.setNome(playList);
-                        playlist.IWillDestroyTheEntireWorld();
+                        clicou = true;
 
+                        playlist.IWillDestroyTheEntireWorld();
+                        playlist.setNome(playlistStr);
 
 
                         playlist.load();
@@ -145,9 +181,9 @@ void seePlaylist(sf::RenderWindow &window,string playList)
                         }
                 }
             }
-            sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
 
-            for(int i = 0; i < playlist._size(); i++)
+
+            for(int i = 0; i < playlistAtual._size(); i++)
             {
                 if(recMusga[i].getGlobalBounds().contains(mousePos))
                 {
@@ -189,19 +225,21 @@ void seePlaylist(sf::RenderWindow &window,string playList)
         window.clear();
         window.setView(movingView);
 
+
         window.draw(background);
         window.draw(quadradoDecima);
 
         window.draw(nome);
 
-        for(int i = 0; i < playlist._size(); i++)
+        for(int i = 0; i < playlistAtual._size(); i++)
         {
 
             window.draw(recMusga[i]);
             window.draw(musgas[i]);
         }
-        pButton.show(window,false);
-
+        pButton.show(window,clicou);
+        window.draw(sprPen);
+        window.draw(trash);
         window.setView(fixedView);
 
         negocio.show(window);

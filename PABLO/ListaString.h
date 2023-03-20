@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include "customMusic.h"
-
+#include <stdio.h>
 
 using namespace std;
 
@@ -157,10 +157,20 @@ class PlayList {
 
     }
 
+    void apagar(){
+        string caminho = "Playlists\\" + nome + ".txt";
+        int status = remove(caminho.c_str());
+        if(!status){
+            println("Arquivo removido");
+        }
+        else{
+            println("foda, deu uma buceta aqui");
+        }
 
+    }
 
     void removerPosicao(int posicao) {
-        if(tamanho == 1) {
+        if(posicao == 0 || tamanho == 1) {
             removerInicio();
             return;
         }
@@ -180,14 +190,15 @@ class PlayList {
         ant->proxNo = dir;
         dir->antNo = ant;
         delete temp;
+        tamanho--;
 
     }
 
     void IWillDestroyTheEntireWorld(){
-            while(tamanho > 0){
-                println(primeiro->musica);
-                removerInicio();
-            }
+        while(tamanho > 0){
+            println(primeiro->musica);
+            removerInicio();
+        }
     }
 };
 

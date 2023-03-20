@@ -38,10 +38,12 @@
 		<Unit filename="CustomMusic.h" />
 		<Unit filename="FolderScanner.h" />
 		<Unit filename="ListaString.h" />
+		<Unit filename="amadoBatista.h" />
 		<Unit filename="angra.h" />
 		<Unit filename="asasMorenas.h" />
 		<Unit filename="bandaDjavu.h" />
 		<Unit filename="bigLove.h" />
+		<Unit filename="loadPlaylist.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="silvanoSalles.h" />
 		<Extensions>

@@ -15,6 +15,11 @@ void homePage(sf::RenderWindow &window) {
     background.setFillColor(sf::Color(255,255,255,20));
 
     bool trocou = false;
+    sf::Texture t;
+    t.loadFromFile("assets/HOMEPAGE.png");
+    sf::Sprite spr;
+    spr.setTexture(t);
+    spr.setPosition(sf::Vector2f(negocio.getSize().x,0));
 
 
     while (window.isOpen()) {
@@ -62,6 +67,7 @@ void homePage(sf::RenderWindow &window) {
         window.clear();
 
         window.draw(background);
+        window.draw(spr);
         negocio.show(window);
         jogador.show(window);
 

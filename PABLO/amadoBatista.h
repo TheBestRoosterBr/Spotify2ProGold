@@ -3,7 +3,7 @@
 
 #include "angra.h"
 
-void homePage(sf::RenderWindow &window) {
+void biblioteca(sf::RenderWindow &window) {
 
     negocioDoLado negocio;
     Jogador jogador;
@@ -21,7 +21,16 @@ void homePage(sf::RenderWindow &window) {
     std::vector <sf::RectangleShape> quadros;
     std::vector <PlayButton> butoes;
 
+    std::vector <string> plists  = get_filenames("Playlists");
 
+    for(int i = 0; i < plists.size(); i++){
+
+
+    }
+    int yScroll = HEIGHT/2;
+
+    sf::View fixedView(sf::FloatRect(0, 0,WIDTH, HEIGHT));
+    sf::View movingView(sf::FloatRect(0,0, WIDTH, HEIGHT));
 
 
 
@@ -39,6 +48,26 @@ void homePage(sf::RenderWindow &window) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            if (event.type == sf::Event::MouseWheelScrolled) {
+                if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+                    if (event.mouseWheelScroll.delta < 0) {
+                        yScroll += 100;
+                        movingView.setCenter(WIDTH/2,yScroll);
+
+                    } else if(event.mouseWheelScroll.delta > 0) {
+                        yScroll -= 100;
+                        if(yScroll < HEIGHT/2) {
+                            yScroll = HEIGHT/2;
+
+                        }
+                        movingView.setCenter(WIDTH/2,yScroll);
+
+                    }
+                }
+            }
+
+
+
 
             negocio.handleEvents(window,event,mouse);
             jogador.handleEvent(window,event,mouse,trocou);
@@ -71,8 +100,18 @@ void homePage(sf::RenderWindow &window) {
 
 
         window.clear();
-
+        window.setView(movingView);
         window.draw(background);
+
+
+
+
+
+
+
+
+
+        window.setView(fixedView);
         negocio.show(window);
         jogador.show(window);
 
