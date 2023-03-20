@@ -70,7 +70,7 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
 
     int gap = WIDTH/25;
 
-    for(int i = 0; i < playlistAtual._size(); i++)
+    for(int i = 0; i < playlistAtual._size() - 1; i++)
     {
 
         recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
@@ -81,8 +81,8 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
         musgas[i].setCharacterSize(WIDTH/75);
         musgas[i].setFillColor(sf::Color::White);
 
-        std::string temp = playlistAtual[i]->musica;
 
+        std::string temp = playlistAtual[i]->musica;
 
 
         musgas[i].setString(temp.c_str() + 8);

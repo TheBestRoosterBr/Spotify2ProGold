@@ -106,10 +106,6 @@ int main(int argc, char ** argv)
 
     if(argc == 2){
         while(arq.compare(tocador.getMusicaAtual())){
-                println("========================================");
-            println(arq);
-            println(tocador.getMusicaAtual());
-
             tocador.skip();
         }
     }

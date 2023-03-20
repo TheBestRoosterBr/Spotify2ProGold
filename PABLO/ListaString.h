@@ -257,6 +257,10 @@ class Tocador {
             musica_atual = musica_atual->proxNo;
             return true;
         }
+        else{
+            update();
+            init();
+        }
 
         return false;
     }
