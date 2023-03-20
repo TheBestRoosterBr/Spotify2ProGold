@@ -4,10 +4,13 @@
 #include "angra.h"
 #include "ListaString.h"
 
-void seePlaylist(sf::RenderWindow &window,string playList)
+void seePlaylist(sf::RenderWindow &window,string playlistStr)
 {
     Jogador jogador;
     jogador.setTocador(&tocador);
+
+    PlayList playlistAtual(playlistStr);
+    playlistAtual.load();
     //jogador.tocador->play();
 
     bool trocou = false;
@@ -47,16 +50,16 @@ void seePlaylist(sf::RenderWindow &window,string playList)
     nome.setCharacterSize(WIDTH/20);
     nome.setFillColor(sf::Color::White);
     nome.setPosition(quadradoDecima.getPosition() + sf::Vector2f(WIDTH/20,WIDTH/20));
-    nome.setString(playlist.getNome());
+    nome.setString(playlistAtual.getNome());
 
 
 
-    sf::Text* musgas = new sf::Text[playlist._size()];
-    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlist._size()];
+    sf::Text* musgas = new sf::Text[playlistAtual._size()];
+    sf::RectangleShape* recMusga = new sf::RectangleShape[ playlistAtual._size()];
 
     int gap = WIDTH/25;
 
-    for(int i = 0; i < playlist._size(); i++)
+    for(int i = 0; i < playlistAtual._size(); i++)
     {
 
         recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
@@ -67,7 +70,7 @@ void seePlaylist(sf::RenderWindow &window,string playList)
         musgas[i].setCharacterSize(WIDTH/75);
         musgas[i].setFillColor(sf::Color::White);
 
-        std::string temp = playlist[i]->musica;
+        std::string temp = playlistAtual[i]->musica;
 
 
 
@@ -105,9 +108,9 @@ void seePlaylist(sf::RenderWindow &window,string playList)
 
                         jogador.tocador->pause();
 
-                        playlist.setNome(playList);
-                        playlist.IWillDestroyTheEntireWorld();
 
+                        playlist.IWillDestroyTheEntireWorld();
+                        playlist.setNome(playlistStr);
 
 
                         playlist.load();
@@ -147,7 +150,7 @@ void seePlaylist(sf::RenderWindow &window,string playList)
             }
             sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
 
-            for(int i = 0; i < playlist._size(); i++)
+            for(int i = 0; i < playlistAtual._size(); i++)
             {
                 if(recMusga[i].getGlobalBounds().contains(mousePos))
                 {
@@ -194,7 +197,7 @@ void seePlaylist(sf::RenderWindow &window,string playList)
 
         window.draw(nome);
 
-        for(int i = 0; i < playlist._size(); i++)
+        for(int i = 0; i < playlistAtual._size(); i++)
         {
 
             window.draw(recMusga[i]);
