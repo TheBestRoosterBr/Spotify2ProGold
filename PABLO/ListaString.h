@@ -160,7 +160,7 @@ class PlayList {
 
 
     void removerPosicao(int posicao) {
-        if(tamanho == 1) {
+        if(posicao == 0 || tamanho == 1) {
             removerInicio();
             return;
         }

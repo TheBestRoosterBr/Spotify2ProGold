@@ -231,6 +231,7 @@ void createPlaylist(sf::RenderWindow &window) {
                             for(int i = 0; i < musgasAdds.size(); i++) {
                                 double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * i * 3;
                                 musgasAdds[i].setPosition(sf::Vector2f(negocio.getSize().x,y));
+                                remover[i].setPosition(sf::Vector2f(WIDTH - remover[i].getGlobalBounds().width * 1.25,y));
                             }
 
                             double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size() * 3;
