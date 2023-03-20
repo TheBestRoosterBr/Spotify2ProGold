@@ -1038,10 +1038,10 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1679256428 c:\spotify2progold\pablo\silvanosalles.h
+1679264981 c:\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679258431 c:\spotify2progold\pablo\asasmorenas.h
+1679270470 c:\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
 1679186178 source:d:\projeto ed\spotifygold\pablo\main.cpp
@@ -2155,7 +2155,7 @@
 	<iostream>
 	"customMusic.h"
 
-1679256427 c:\spotify2progold\pablo\listastring.h
+1679264981 c:\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
@@ -2163,9 +2163,9 @@
 
 1679185523 D
 
-1679260527 c:\spotify2progold\pablo\angra.h
+1679264982 c:\spotify2progold\pablo\angra.h
 
-1679257205 c:\spotify2progold\pablo\bandadjavu.h
+1679269630 c:\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
 1679186951 d:\projeto ed\spotifygold\pablo\listastring.h
@@ -2195,7 +2195,7 @@
 1679198207 c:\users\okaua\desktop\spotify2progold\pablo\loadplaylist.h
 	<sys/stat.h>
 
-1679260976 c:\spotify2progold\pablo\biglove.h
+1679267258 c:\spotify2progold\pablo\biglove.h
 	"angra.h"
 	"ListaString.h"
 
@@ -2751,7 +2751,7 @@
 	<vector>
 	"ListaString.h"
 
-1679256010 d:\projeto ed\spotifygold\spotify2progold\pablo\listastring.h
+1679261029 d:\projeto ed\spotifygold\spotify2progold\pablo\listastring.h
 	<string>
 	<fstream>
 	<iostream>
@@ -2760,15 +2760,15 @@
 1679254210 d:\projeto ed\spotifygold\spotify2progold\pablo\asasmorenas.h
 	<dirent.h>
 
-1679254472 d:\projeto ed\spotifygold\spotify2progold\pablo\silvanosalles.h
+1679260523 d:\projeto ed\spotifygold\spotify2progold\pablo\silvanosalles.h
 	"angra.h"
 
-1679252160 d:\projeto ed\spotifygold\spotify2progold\pablo\angra.h
+1679260362 d:\projeto ed\spotifygold\spotify2progold\pablo\angra.h
 
-1679255520 d:\projeto ed\spotifygold\spotify2progold\pablo\bandadjavu.h
+1679261105 d:\projeto ed\spotifygold\spotify2progold\pablo\bandadjavu.h
 	"angra.h"
 
-1679255123 d:\projeto ed\spotifygold\spotify2progold\pablo\biglove.h
+1679261114 d:\projeto ed\spotifygold\spotify2progold\pablo\biglove.h
 	"angra.h"
 	"ListaString.h"
 

@@ -63,6 +63,7 @@ void createPlaylist(sf::RenderWindow &window) {
     FolderScanner scan;
     std::vector <string> musicas;
     std::vector <sf::Text> musgasAdds;
+    std::vector <sf::RectangleShape> recMusgasAdds;
 
     if(argumentos == 1)
         scan.setPath("musicas");
@@ -189,11 +190,43 @@ void createPlaylist(sf::RenderWindow &window) {
                             txt.setFillColor(sf::Color::White);
                             txt.setString(musicas[i]);
                             txt.setPosition(sf::Vector2f(
-                                negocio.getSize().x,
-                                quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size()
-                            ));
+                                                negocio.getSize().x,
+                                                quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * 2 * musgasAdds.size()
+                                            ));
+
 
                             musgasAdds.push_back(txt);
+
+                            double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size();
+
+                            for(int i = 0; i < musicas.size(); i++) {
+                                recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
+                                recMusga[i].setPosition(sf::Vector2f(negocio.getSize().x, gap * i + y * 1.2));
+                                recMusga[i].setFillColor(sf::Color(255,255,255,20));
+
+                                addMusga[i].setFont(arial);
+                                addMusga[i].setCharacterSize(WIDTH/75);
+                                addMusga[i].setFillColor(sf::Color::White);
+                                addMusga[i].setString("Adicionar");
+                                addMusga[i].setPosition(sf::Vector2f(
+                                                            WIDTH - addMusga[i].getGlobalBounds().width * 1.5,
+                                                            recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                                                        ));
+                                musgas[i].setFont(arial);
+                                musgas[i].setCharacterSize(WIDTH/75);
+                                musgas[i].setFillColor(sf::Color::White);
+                                musgas[i].setString(musicas[i]);
+                                musgas[i].setPosition(sf::Vector2f(
+                                                          recMusga[i].getPosition().x + WIDTH/100,
+                                                          recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
+                                                      ));
+
+
+                            }
+
+
+
+
                         }
                     }
 
@@ -212,6 +245,22 @@ void createPlaylist(sf::RenderWindow &window) {
         jogador.bAvancar.hover(mouse);
         jogador.bVoltar.hover(mouse);
         jogador.negQficaGrande.hover(mouse,window);
+
+        jogador.ltimer.update(sf::seconds(jogador.tocador->getMusicPosicion()));
+        jogador.rtimer.update(sf::seconds(jogador.tocador->getMusicDuration()));
+
+        if(jogador.tocador->music->getStatus() != sf::Music::Playing && jogador.tocador->music->getStatus() != sf::Music::Paused) {
+
+            if(jogador.lButton.getValue()) {
+                jogador.tocador->music->setPosition(sf::seconds(0));
+                jogador.tocador->play();
+            } else {
+                jogador.tocador->skip(jogador.rButton.getValue());
+                jogador.tocador->play();
+
+            }
+
+        }
 
         window.clear();
 
@@ -234,7 +283,9 @@ void createPlaylist(sf::RenderWindow &window) {
             window.draw(addMusga[i]);
             window.draw(musgas[i]);
         }
-
+        for(auto i : musgasAdds) {
+            window.draw(i);
+        }
 
         window.setView(fixedView);
         negocio.show(window);

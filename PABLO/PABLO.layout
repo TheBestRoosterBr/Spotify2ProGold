@@ -2,6 +2,7 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
+<<<<<<< HEAD
 	<File name="bandaDjavu.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="5434" topLine="0" />
@@ -15,8 +16,33 @@
 	<File name="asasMorenas.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="315" topLine="84" />
+=======
+	<File name="asasMorenas.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4856" topLine="160" />
 		</Cursor>
 	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="299" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="angra.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6517" topLine="0" />
+>>>>>>> 9179e91470d82b912f7b03b78ac0b3f2671f13f3
+		</Cursor>
+		<Folding>
+			<Collapse line="4" />
+			<Collapse line="79" />
+			<Collapse line="127" />
+			<Collapse line="173" />
+			<Collapse line="233" />
+			<Collapse line="268" />
+			<Collapse line="310" />
+		</Folding>
+	</File>
+<<<<<<< HEAD
 	<File name="ListaString.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="212" topLine="238" />
@@ -30,8 +56,27 @@
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="275" topLine="80" />
+=======
+	<File name="bigLove.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="369" topLine="67" />
 		</Cursor>
 	</File>
+	<File name="silvanoSalles.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="236" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="CustomMusic.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="801" topLine="0" />
+>>>>>>> 9179e91470d82b912f7b03b78ac0b3f2671f13f3
+		</Cursor>
+		<Folding>
+			<Collapse line="56" />
+		</Folding>
+	</File>
+<<<<<<< HEAD
 	<File name="bigLove.h" open="1" top="1" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="5172" topLine="170" />
@@ -45,6 +90,16 @@
 	<File name="silvanoSalles.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1331" topLine="0" />
+=======
+	<File name="ListaString.h" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3237" topLine="161" />
+		</Cursor>
+	</File>
+	<File name="bandaDjavu.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2069" topLine="54" />
+>>>>>>> 9179e91470d82b912f7b03b78ac0b3f2671f13f3
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

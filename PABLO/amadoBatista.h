@@ -1,5 +1,5 @@
-#ifndef SILVANOSALLES_H_INCLUDED
-#define SILVANOSALLES_H_INCLUDED
+#ifndef AMADOBATISTA_H_INCLUDED
+#define AMADOBATISTA_H_INCLUDED
 
 #include "angra.h"
 
@@ -17,6 +17,13 @@ void homePage(sf::RenderWindow &window) {
 
     sf::RectangleShape background(sf::Vector2f(WIDTH,HEIGHT));
     background.setFillColor(sf::Color(255,255,255,20));
+
+    std::vector <sf::RectangleShape> quadros;
+    std::vector <PlayButton> butoes;
+
+
+
+
 
     bool trocou = false;
 
@@ -73,5 +80,4 @@ void homePage(sf::RenderWindow &window) {
     }
 }
 
-
-#endif // SILVANOSALLES_H_INCLUDED
+#endif // AMADOBATISTA_H_INCLUDED

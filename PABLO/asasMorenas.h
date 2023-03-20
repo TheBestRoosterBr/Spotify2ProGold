@@ -60,12 +60,13 @@ public:
         homSpr.setTexture(homTex);
         homSpr.setScale(0.75,0.75);
         homSpr.setPosition(posX - homSpr.getGlobalBounds().width/6,posY * 2);
+        homSpr.setColor(sf::Color(100,100,100));
 
         int sprX = posX - homSpr.getGlobalBounds().width/6;
         int tposx = posX * 1.2 + homSpr.getGlobalBounds().width;
 
         arial.loadFromFile("fontes/arialBold.ttf");
-        inicio.setColor(sf::Color::White);
+        inicio.setColor(sf::Color(100,100,100));
         inicio.setFont(arial);
         inicio.setCharacterSize(csize);
         inicio.setString("Início");
@@ -76,7 +77,9 @@ public:
 
         lupSpr.setPosition(sprX,posY * 3);
 
-        buscar.setColor(sf::Color(255,255,255));
+        lupSpr.setColor(sf::Color(100,100,100));
+
+        buscar.setColor(sf::Color(100,100,100));
         buscar.setFont(arial);
         buscar.setCharacterSize(csize);
         buscar.setString("Buscar");
@@ -85,8 +88,9 @@ public:
         bibT.loadFromFile("assets/bib.png");
         bibSpr.setTexture(bibT);
         bibSpr.setPosition(sprX,posY * 4);
+        bibSpr.setColor(sf::Color(100,100,100));
 
-        sua_bib.setColor(sf::Color(255,255,255));
+        sua_bib.setColor(sf::Color(100,100,100));
         sua_bib.setFont(arial);
         sua_bib.setCharacterSize(csize);
         sua_bib.setString("Sua Biblioteca");
@@ -121,6 +125,46 @@ public:
         return sf::Vector2f(wid * 1.333,hei);
     }
 
+    bool hoverHome(sf::Vector2f mouse){
+        if(homSpr.getGlobalBounds().contains(mouse) || inicio.getGlobalBounds().contains(mouse)){
+            homSpr.setColor(sf::Color(255,255,255));
+            inicio.setColor(sf::Color(255,255,255));
+            return true;
+        } else {
+            homSpr.setColor(sf::Color(100,100,100));
+            inicio.setColor(sf::Color(100,100,100));
+            return false;
+        }
+
+    }
+
+    bool hoverBuscar(sf::Vector2f mouse){
+        if(lupSpr.getGlobalBounds().contains(mouse) || buscar.getGlobalBounds().contains(mouse)){
+            lupSpr.setColor(sf::Color(255,255,255));
+            buscar.setColor(sf::Color(255,255,255));
+            return true;
+        } else {
+            lupSpr.setColor(sf::Color(100,100,100));
+            buscar.setColor(sf::Color(100,100,100));
+            return false;
+        }
+
+    }
+
+     bool hoverBib(sf::Vector2f mouse){
+        if(bibSpr.getGlobalBounds().contains(mouse) || sua_bib.getGlobalBounds().contains(mouse)){
+            bibSpr.setColor(sf::Color(255,255,255));
+            sua_bib.setColor(sf::Color(255,255,255));
+            return true;
+        } else {
+            bibSpr.setColor(sf::Color(100,100,100));
+            sua_bib.setColor(sf::Color(100,100,100));
+            return false;
+        }
+
+    }
+
+
     bool hoverCreatePlaylist(sf::Vector2f mouse) {
         if(playSpr.getGlobalBounds().contains(mouse) || sua_play.getGlobalBounds().contains(mouse)) {
             playSpr.setColor(sf::Color(255,255,255));
@@ -144,9 +188,10 @@ public:
     }
 
     void hover(sf::Vector2f mouse) {
-
+        hoverHome(mouse);
         hoverCreatePlaylist(mouse);
-
+        hoverBuscar(mouse);
+        hoverBib(mouse);
         for(int i=0; i < plists.size(); i++)
             hoverPlaylist(mouse,i);
 
