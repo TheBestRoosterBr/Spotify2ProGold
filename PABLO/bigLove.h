@@ -38,7 +38,7 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
     pButton.setPosition(sf::Vector2f(negocio.getSize().x * 1.25,quadradoDecima.getSize().y/2));
 
 
-
+    bool clicou = false;
 
     sf::Font arial;
     arial.loadFromFile("fontes/arialBold.ttf");
@@ -131,14 +131,16 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
                     }
 
                     if(trash.getGlobalBounds().contains(mousePos)){
-                        //como cabrumco eu deleto a playlist
-
+                       playlistAtual.IWillDestroyTheEntireWorld();
+                       playlistAtual.apagar();
+                       homePage(window);
 
                     }
                     if(pButton.hover(mouse)){
 
                         jogador.tocador->pause();
 
+                        clicou = true;
 
                         playlist.IWillDestroyTheEntireWorld();
                         playlist.setNome(playlistStr);
@@ -235,7 +237,7 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
             window.draw(recMusga[i]);
             window.draw(musgas[i]);
         }
-        pButton.show(window,false);
+        pButton.show(window,clicou);
         window.draw(sprPen);
         window.draw(trash);
         window.setView(fixedView);

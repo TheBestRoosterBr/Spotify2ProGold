@@ -232,6 +232,13 @@ public:
                 if(hoverCreatePlaylist(mouse)) {
                     createPlaylist(window);
                 }
+                if(hoverHome(mouse)){
+                    homePage(window);
+                }
+                if(hoverBib(mouse)){
+                    biblioteca(window);
+
+                }
                 for(int i=0; i < plists.size(); i++) {
                     if(hoverPlaylist(mouse,i)) {
                         seePlaylist(window,plists[i]);
