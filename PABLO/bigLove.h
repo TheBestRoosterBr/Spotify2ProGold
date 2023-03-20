@@ -53,6 +53,17 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
     nome.setString(playlistAtual.getNome());
 
 
+    sf::Texture pent;
+    pent.loadFromFile("assets/pen-to-square-solid.png");
+    sf::Sprite sprPen(pent);
+    sprPen.setScale(0.5,0.5);
+    sprPen.setPosition(sf::Vector2f(WIDTH - sprPen.getGlobalBounds().width * 2,nome.getPosition().y));
+
+    sf::Texture ttrash;
+    ttrash.loadFromFile("assets/trash-solid.png");
+    sf::Sprite trash(ttrash);
+    trash.setScale(0.5,0.5);
+    trash.setPosition(sf::Vector2f(WIDTH - sprPen.getGlobalBounds().width * 2,nome.getPosition().y + trash.getGlobalBounds().height * 2));
 
     sf::Text* musgas = new sf::Text[playlistAtual._size()];
     sf::RectangleShape* recMusga = new sf::RectangleShape[ playlistAtual._size()];
@@ -98,12 +109,32 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-
+             sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
             negocio.handleEvents(window,event,mouse);
+            if(sprPen.getGlobalBounds().contains(mousePos)){
+                sprPen.setColor(sf::Color(212,175,55));
+            }else{
+                sprPen.setColor(sf::Color(255,255,255));
+            }
+
+            if(trash.getGlobalBounds().contains(mousePos)){
+                trash.setColor(sf::Color(212,175,55));
+            }else{
+                trash.setColor(sf::Color(255,255,255));
+            }
 
             if(event.type == sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button == sf::Mouse::Left){
 
+                    if(sprPen.getGlobalBounds().contains(mousePos)){
+                        editPlaylist(window,playlistStr);
+                    }
+
+                    if(trash.getGlobalBounds().contains(mousePos)){
+                        //como cabrumco eu deleto a playlist
+
+
+                    }
                     if(pButton.hover(mouse)){
 
                         jogador.tocador->pause();
@@ -148,7 +179,7 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
                         }
                 }
             }
-            sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window), movingView);
+
 
             for(int i = 0; i < playlistAtual._size(); i++)
             {
@@ -192,6 +223,7 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
         window.clear();
         window.setView(movingView);
 
+
         window.draw(background);
         window.draw(quadradoDecima);
 
@@ -204,7 +236,8 @@ void seePlaylist(sf::RenderWindow &window,string playlistStr)
             window.draw(musgas[i]);
         }
         pButton.show(window,false);
-
+        window.draw(sprPen);
+        window.draw(trash);
         window.setView(fixedView);
 
         negocio.show(window);

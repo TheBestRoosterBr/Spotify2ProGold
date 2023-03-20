@@ -301,7 +301,7 @@ void createPlaylist(sf::RenderWindow &window) {
                         }
                     }
 
-                    if(nome.getGlobalBounds().contains(mouse) && trocarNome == false) {
+                    if(nome.getGlobalBounds().contains(mouse) || sprPen.getGlobalBounds().contains(mouse) && trocarNome == false) {
                         trocarNome = true;
                         name = "";
                     }
@@ -348,8 +348,8 @@ void createPlaylist(sf::RenderWindow &window) {
 
         if(trocarNome) {
             window.draw(nomenome);
-        }else{
-             window.draw(sprPen);
+        } else {
+            window.draw(sprPen);
         }
         for(int i = 0; i < musicas.size(); i++) {
             window.draw(recMusga[i]);
@@ -371,23 +371,20 @@ void createPlaylist(sf::RenderWindow &window) {
     }
 }
 
-void createPlaylist(sf::RenderWindow &window, string playlistStr) {
+void editPlaylist(sf::RenderWindow &window, string playlistStr) {
+
     Jogador jogador;
     jogador.setTocador(&tocador);
 
 
-    PlayList newPlaylist;
-
+    PlayList newPlaylist(playlistStr);
+    newPlaylist.load();
 
     bool trocou = false;
 
-    string name = "Minha playlist";
-
-    newPlaylist.setNome(name);
-    newPlaylist.savePlaylist();
+    string name = playlistStr;
 
     negocioDoLado negocio;
-
 
 
     sf::RectangleShape background(sf::Vector2f(WIDTH,HEIGHT * 3));
@@ -446,6 +443,30 @@ void createPlaylist(sf::RenderWindow &window, string playlistStr) {
     std::vector <sf::Text> musgasAdds;
     std::vector <sf::Text> remover;
 
+    for(int i= 0; i < newPlaylist._size(); i++) {
+        sf::Text txt;
+        txt.setFont(arial);
+        txt.setCharacterSize(WIDTH/75);
+        txt.setFillColor(sf::Color::White);
+        txt.setString(newPlaylist[i]->musica);
+
+        double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size() * 3;
+
+        txt.setPosition(sf::Vector2f(negocio.getSize().x,y));
+
+        musgasAdds.push_back(txt);
+
+
+        sf::Text remov;
+        remov.setFont(arial);
+        remov.setCharacterSize(WIDTH/75);
+        remov.setFillColor(sf::Color::White);
+        remov.setString("Remover");
+        remov.setPosition(sf::Vector2f(WIDTH - remov.getGlobalBounds().width * 1.25,y));
+
+        remover.push_back(remov);
+    }
+
     if(argumentos == 1)
         scan.setPath("musicas");
     else
@@ -458,30 +479,8 @@ void createPlaylist(sf::RenderWindow &window, string playlistStr) {
     sf::Text* addMusga = new sf::Text[musicas.size()];
 
     int gap = WIDTH/25;
-    for(int i = 0; i < musicas.size(); i++) {
-        recMusga[i].setSize(sf::Vector2f(quadradoDecima.getSize().x,gap));
-        recMusga[i].setPosition(sf::Vector2f(negocio.getSize().x, gap * i + quadradoDecima.getGlobalBounds().height * 1.2));
-        recMusga[i].setFillColor(sf::Color(255,255,255,20));
-
-        addMusga[i].setFont(arial);
-        addMusga[i].setCharacterSize(WIDTH/75);
-        addMusga[i].setFillColor(sf::Color::White);
-        addMusga[i].setString("Adicionar");
-        addMusga[i].setPosition(sf::Vector2f(
-                                    WIDTH - addMusga[i].getGlobalBounds().width * 1.5,
-                                    recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
-                                ));
-        musgas[i].setFont(arial);
-        musgas[i].setCharacterSize(WIDTH/75);
-        musgas[i].setFillColor(sf::Color::White);
-        musgas[i].setString(musicas[i]);
-        musgas[i].setPosition(sf::Vector2f(
-                                  recMusga[i].getPosition().x + WIDTH/100,
-                                  recMusga[i].getPosition().y + addMusga[i].getGlobalBounds().height
-                              ));
-
-
-    }
+    double y =  quadradoDecima.getGlobalBounds().height * 1.2 + WIDTH/75 * musgasAdds.size() * 3;
+    atualizarPosicao(musicas,musgas,recMusga, addMusga,quadradoDecima.getSize().x,negocio.getSize().x,gap, y,arial);
 
 
 
@@ -639,7 +638,7 @@ void createPlaylist(sf::RenderWindow &window, string playlistStr) {
                         }
                     }
 
-                    if(nome.getGlobalBounds().contains(mouse) && trocarNome == false) {
+                    if(nome.getGlobalBounds().contains(mouse) || sprPen.getGlobalBounds().contains(mouse) && trocarNome == false) {
                         trocarNome = true;
                         name = "";
                     }
@@ -686,8 +685,8 @@ void createPlaylist(sf::RenderWindow &window, string playlistStr) {
 
         if(trocarNome) {
             window.draw(nomenome);
-        }else{
-             window.draw(sprPen);
+        } else {
+            window.draw(sprPen);
         }
         for(int i = 0; i < musicas.size(); i++) {
             window.draw(recMusga[i]);
